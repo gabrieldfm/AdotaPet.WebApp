@@ -206,6 +206,7 @@
     </Compile>
     <Compile Include="Models\Entities\Doenca.cs" />
     <Compile Include="Models\Entities\Endereco.cs" />
+    <Compile Include="Models\Entities\Ong.cs" />
     <Compile Include="Models\Entities\Raca.cs" />
     <Compile Include="Models\Entities\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
