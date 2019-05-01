@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AdotaPet.WebApp.Models.Entities
 {
@@ -11,13 +7,13 @@ namespace AdotaPet.WebApp.Models.Entities
         [Required]
         public int Id { get; set; }
 
-        [Required]
+        [Required, StringLength(50)]
         public string Nome { get; set; }
 
-        [Required]
+        [Required, StringLength(100)]
         public string Login { get; set; }
 
-        [Required]
+        [Required, StringLength(200)]
         public string Senha { get; set; }
     }
 }

@@ -10,13 +10,13 @@ namespace AdotaPet.WebApp.Models.Entities
         [Required]
         public int Numero { get; set; }
 
-        [Required]
+        [Required, StringLength(200)]
         public string Bairro { get; set; }
 
-        [Required]
+        [Required, StringLength(200)]
         public string Logradouro { get; set; }
 
-        [Required]
+        [Required, StringLength(30)]
         public string Cep { get; set; }
         
     }
