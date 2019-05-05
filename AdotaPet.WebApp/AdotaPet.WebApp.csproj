@@ -211,6 +211,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Biblioteca\Geral.cs" />
+    <Compile Include="Controllers\DoencaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -274,6 +275,11 @@
     <Content Include="Views\Raca\Details.cshtml" />
     <Content Include="Views\Raca\Edit.cshtml" />
     <Content Include="Views\Raca\Index.cshtml" />
+    <Content Include="Views\Doenca\Create.cshtml" />
+    <Content Include="Views\Doenca\Delete.cshtml" />
+    <Content Include="Views\Doenca\Details.cshtml" />
+    <Content Include="Views\Doenca\Edit.cshtml" />
+    <Content Include="Views\Doenca\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

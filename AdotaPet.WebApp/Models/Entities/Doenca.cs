@@ -5,9 +5,8 @@ namespace AdotaPet.WebApp.Models.Entities
     public class Doenca
     {
         [Required]
-        public int Id { get; set; }
+        public int Id { get; set; }        
         
-        [Required]
         public int Codigo { get; set; }
 
         [Required, StringLength(200)]

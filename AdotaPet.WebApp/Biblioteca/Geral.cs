@@ -7,12 +7,12 @@ using AdotaPet.WebApp.Models.Entities;
 
 namespace AdotaPet.WebApp.Biblioteca
 {
-    public class Geral
+    public static class Geral
     {
-        AdotaPetWebAppContext db = new AdotaPetWebAppContext();
-        public int obterProximoCodigo(string classe)
+        public static int obterProximoCodigo(string classe)
         {
-            return db.Database.SqlQuery<int>("SELECT MAX(codigo) FROM "+classe).ToList()[0] + 1; ;
+            //var teste = new ApplicationContext()..Count();
+            return new AdotaPetWebAppContext().Database.SqlQuery<int>("SELECT MAX(codigo) FROM "+classe).ToList()[0] + 1; ;
         }
     }
 }

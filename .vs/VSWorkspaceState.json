@@ -1,10 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\AdotaPet.WebApp",
     "\\AdotaPet.WebApp\\Controllers",
     "\\AdotaPet.WebApp\\Models",
-    "\\AdotaPet.WebApp\\Models\\Entities"
+    "\\AdotaPet.WebApp\\Models\\Entities",
+    "\\AdotaPet.WebApp\\Views",
+    "\\AdotaPet.WebApp\\Views\\Doenca"
   ],
-  "SelectedNode": "\\AdotaPet.WebApp.sln",
+  "SelectedNode": "\\AdotaPet.WebApp\\Views\\Doenca\\Create.cshtml",
   "PreviewInSolutionExplorer": false
 }
