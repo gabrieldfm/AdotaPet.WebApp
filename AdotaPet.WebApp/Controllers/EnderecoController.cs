@@ -94,6 +94,12 @@ namespace AdotaPet.WebApp.Controllers
             } 
 
         }
+
+
+        private void teste_click()
+        {
+
+        }
         // GET: Endereco/Edit/5
         public ActionResult Edit(int? id)
         {

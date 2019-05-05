@@ -87,6 +87,7 @@
         }
         function sugerirEndereco() {
             var cep = $("#Cep").val();
+             $("#Complemento").val(".");
             $.ajax({
                 type: "POST",
                 url: "\ObterCep",
