@@ -7,7 +7,6 @@ namespace AdotaPet.WebApp.Models.Entities
         [Required]
         public int Id { get; set; }
 
-        [Required]
         public int Codigo { get; set; }
 
         [Required, StringLength(200)]
@@ -24,9 +23,8 @@ namespace AdotaPet.WebApp.Models.Entities
 
         [Required]
         public char Sexo { get; set; }
-
-        [Required]
-        public char Castrado { get; set; }
+       
+        public DataType Castrado { get; set; }
 
         [Required]
         public Ong Ong_Id { get; set; }
