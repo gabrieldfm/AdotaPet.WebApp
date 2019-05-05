@@ -245,6 +245,10 @@ namespace AdotaPet.WebApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Ativo")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
+
                     b.Property<string>("Login")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -252,6 +256,10 @@ namespace AdotaPet.WebApp.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasMaxLength(15);
 
                     b.Property<string>("Senha")
                         .IsRequired()
