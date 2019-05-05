@@ -6,3 +6,7 @@ Debug
 AdotaPet\.WebApp/bin/
 
 \.vs/config/
+
+AdotaPet\.WebApp/obj/Debug_E/
+
+AdotaPet\.WebApp/obj/Debug_G/

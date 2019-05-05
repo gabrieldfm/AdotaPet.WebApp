@@ -17,13 +17,16 @@ namespace AdotaPet.WebApp.Models.Entities
         public short Porte { get; set; }
 
         [Required]
-        public int Vacina { get; set; }
+        public char Vacina { get; set; }
 
         [Required]
-        public short Vermifugado { get; set; }
+        public char Vermifugado { get; set; }
 
         [Required]
         public char Sexo { get; set; }
+
+        [Required]
+        public char Castrado { get; set; }
 
         [Required]
         public Ong Ong_Id { get; set; }
@@ -32,6 +35,6 @@ namespace AdotaPet.WebApp.Models.Entities
         public Doenca Doenca_Id { get; set; }
 
         [Required]
-        public Doenca Raca_Id { get; set; }
+        public Raca Raca_Id { get; set; }
     }
 }
