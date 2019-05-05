@@ -100,21 +100,35 @@
                     } else {
                         $("#UF").val(resposta.uf);
                     }
-                     $("#Bairro").val(resposta.bairro);   
-                        $("#Logradouro").val(resposta.endereco);
-                    
-                    
-                    $("#Cidade").val(resposta.cidade);                 
-                    
-                        
-                    if ($("#Complemento").val != "") {
-                        $("#Complemento").val(resposta.complemento2);
+
+                    if ($("#Bairro").val() != "") {
+                        $("#Bairro").val();
+                    } else {
+                        $("#Bairro").val(resposta.bairro);
                     }
 
-                },
-                error: function (e) {
+                    if ($("#Logradouro").val() != "") {
+                        $("#Logradouro").val();
+                    } else {
+                        $("#Logradouro").val(resposta.endereco);
+                    }
+                        
+                    if ($("#Cidade").val() != "") {
+                        $("#Cidade").val();
+                    } else {
+                        $("#Cidade").val(resposta.cidade);
+                    }
 
-                    alert("deu ruim");
+                    if ($("#Complemento").val() != "") {
+                        $("#Complemento").val();
+                    } else {
+                        $("#Complemento").val(resposta.complemento2);
+                    }
+                    
+                },
+                error: function (obj) {
+
+                    alert(obj);
                 }
             });
         }
@@ -124,3 +138,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+

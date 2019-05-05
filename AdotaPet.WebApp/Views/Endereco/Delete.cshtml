@@ -1,54 +1,22 @@
 ﻿@model AdotaPet.WebApp.Models.Entities.Endereco
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Deletar endereços";
 }
 
-<h2>Deletar</h2>
+<h2>Deletar endereços</h2>
 
 <h3>Você tem certeza que deseja apagar o endereço selecionado?</h3>
 <div>
-    <h4>Endereco</h4>
+    
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Numero)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Numero)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Bairro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bairro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Logradouro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Logradouro)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Cep)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Cep)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cidade)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cidade)
         </dd>
 
         <dt>
@@ -60,6 +28,30 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Cidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Logradouro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Logradouro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Complemento)
         </dt>
 
@@ -67,14 +59,24 @@
             @Html.DisplayFor(model => model.Complemento)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Bairro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bairro)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="Deletar" class="btn btn-danger" />
+
+        @Html.ActionLink("Listagem", "Index", "Index", new { @class = "btn btn-primary" })
+        
+    </div>
     }
 </div>
