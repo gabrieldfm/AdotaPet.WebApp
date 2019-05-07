@@ -227,8 +227,6 @@
       <DependentUpon>20190501133655_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
-    <Compile Include="Models\AdotaPetWebAppContext.cs" />
-    <Compile Include="Models\EnderecoContext.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />
     <Compile Include="Models\Entities\Adocao_Itens.cs" />
     <Compile Include="Models\Entities\Animal.cs" />

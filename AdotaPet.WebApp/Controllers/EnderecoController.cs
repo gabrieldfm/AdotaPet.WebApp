@@ -15,12 +15,12 @@ namespace AdotaPet.WebApp.Controllers
     public class EnderecoController : Controller
     {
 
-        private EnderecoContext db = new EnderecoContext();
+        private ApplicationContext db = new ApplicationContext();
 
         // GET: Endereco
         public ActionResult Index()
         {
-            return View(db.Enderecoes.ToList());
+            return View(db.Endereco.ToList());
         }
 
         // GET: Endereco/Details/5
@@ -30,7 +30,7 @@ namespace AdotaPet.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Endereco endereco = db.Enderecoes.Find(id);
+            Endereco endereco = db.Endereco.Find(id);
             if (endereco == null)
             {
                 return HttpNotFound();
@@ -53,7 +53,7 @@ namespace AdotaPet.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Enderecoes.Add(endereco);
+                db.Endereco.Add(endereco);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -102,7 +102,7 @@ namespace AdotaPet.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Endereco endereco = db.Enderecoes.Find(id);
+            Endereco endereco = db.Endereco.Find(id);
             if (endereco == null)
             {
                 return HttpNotFound();
@@ -119,7 +119,7 @@ namespace AdotaPet.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(endereco).State = EntityState.Modified;
+                db.Entry(endereco).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -133,7 +133,7 @@ namespace AdotaPet.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Endereco endereco = db.Enderecoes.Find(id);
+            Endereco endereco = db.Endereco.Find(id);
             if (endereco == null)
             {
                 return HttpNotFound();
@@ -146,8 +146,8 @@ namespace AdotaPet.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Endereco endereco = db.Enderecoes.Find(id);
-            db.Enderecoes.Remove(endereco);
+            Endereco endereco = db.Endereco.Find(id);
+            db.Endereco.Remove(endereco);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
