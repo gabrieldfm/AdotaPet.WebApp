@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\AdotaPet.WebApp\\Controllers",
+    "\\AdotaPet.WebApp\\Migrations"
   ],
+  "SelectedNode": "\\AdotaPet.WebApp",
   "PreviewInSolutionExplorer": false
 }
