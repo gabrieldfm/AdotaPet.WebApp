@@ -95,6 +95,11 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (resposta) {
+                    console.log(resposta);
+                    if (resposta.codigo == 500) {
+                        alert(resposta.mensagem);
+                        return false;
+                    }
 
                     if ($("#UF").val() != "") {
                         $("#UF").val();
@@ -128,8 +133,8 @@
                     
                 },
                 error: function (obj) {
-
-                    alert(obj);
+                    alert("Erro inesperado entre em contato com o suporte tecnico.");
+                    
                 }
             });
         }

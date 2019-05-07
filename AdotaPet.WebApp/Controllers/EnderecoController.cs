@@ -90,7 +90,7 @@ namespace AdotaPet.WebApp.Controllers
                     codigo = 500,
                     mensagem = ex.Message.ToString() 
                 };
-                return Json(obj, JsonRequestBehavior.AllowGet);
+                return Json(obj, JsonRequestBehavior.AllowGet); 
             } 
 
         }
