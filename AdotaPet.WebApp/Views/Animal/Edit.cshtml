@@ -1,18 +1,17 @@
 ﻿@model AdotaPet.WebApp.Models.Entities.Animal
 
 @{
-    ViewBag.Title = "Edit vgfgfg";
+    ViewBag.Title = "Editar animal";
 }
 
-<h2>Edit</h2>
+<h2>Editar animal</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Animal</h4>
+<div class="form-horizontal">   
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
@@ -99,15 +98,12 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10" id="btnCadastrar">
-            <input type="button" value="Salvar" id="btnSalvar" class="btn btn-default" />
+            <input type="button" value="Salvar" id="btnSalvar" class="btn btn-success" />
         </div>
     </div>
 </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 <script>
     window.onload = function () {
         $("#btnCadastrar").css("margin-left", "9%");
