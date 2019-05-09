@@ -13,7 +13,12 @@ namespace AdotaPet.WebApp.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
-        // GET: Usuario
+        public ActionResult Index()
+        {
+            return View(db.Usuario.ToList());
+        }
+
+        [AllowAnonymous]
         public ActionResult Login(string returnURL)
         {
             /*Recebe a url que o usuário tentou acessar*/
@@ -23,100 +28,60 @@ namespace AdotaPet.WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Usuario login, string returnUrl)
+        public ActionResult Login(string login, string senha, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-
-                var vLogin = db.Usuario.Where(p => p.Login.Equals(login.Login)).FirstOrDefault();
-                /*Verificar se a variavel vLogin está vazia. 
-                Isso pode ocorrer caso o usuário não existe. 
-                Caso não exista ele vai cair na condição else.*/
+                var vLogin = db.Usuario.Where(p => p.Login.Equals(login)).FirstOrDefault();
                 if (vLogin != null)
                 {
-                    /*Código abaixo verifica se o usuário que retornou na variavel tem está 
-                      ativo. Caso não esteja cai direto no else*/
-                    if (Equals(vLogin.Ativo, "S"))
+                    if (Equals(vLogin.Ativo, 'S'))
                     {
-                        /*Código abaixo verifica se a senha digitada no site é igual a 
-                        senha que está sendo retornada 
-                         do banco. Caso não cai direto no else*/
-                        if (Equals(vLogin.Senha, login.Senha))
+                        if (Equals(vLogin.Senha, senha))
                         {
                             FormsAuthentication.SetAuthCookie(vLogin.Login, false);
                             if (Url.IsLocalUrl(returnUrl)
-                            && returnUrl.Length > 1
-                            && returnUrl.StartsWith("/")
-                            && !returnUrl.StartsWith("//")
-                            && returnUrl.StartsWith("/\\"))
+                                && returnUrl.Length > 1
+                                && returnUrl.StartsWith("/")
+                                && !returnUrl.StartsWith("//")
+                                && returnUrl.StartsWith("/\\"))
                             {
                                 return Redirect(returnUrl);
                             }
-                            /*código abaixo cria uma session para armazenar o nome do usuário*/
                             Session["Nome"] = vLogin.Nome;
-                            /*código abaixo cria uma session para armazenar o sobrenome do usuário*/
                             Session["Login"] = vLogin.Login;
-                            /*retorna para a tela inicial do Home*/
                             return RedirectToAction("Index", "Home");
                         }
-                        /*Else responsável da validação da senha*/
                         else
                         {
-                            /*Escreve na tela a mensagem de erro informada*/
                             ModelState.AddModelError("", "Senha informada Inválida!!!");
-                            /*Retorna a tela de login*/
                             return View(new Usuario());
                         }
                     }
-                    /*Else responsável por verificar se o usuário está ativo*/
                     else
                     {
-                        /*Escreve na tela a mensagem de erro informada*/
                         ModelState.AddModelError("", "Usuário sem acesso para usar o sistema!!!");
-                        /*Retorna a tela de login*/
                         return View(new Usuario());
                     }
                 }
-                /*Else responsável por verificar se o usuário existe*/
                 else
                 {
-                    /*Escreve na tela a mensagem de erro informada*/
                     ModelState.AddModelError("", "Login informado inválido!!!");
-                    /*Retorna a tela de login*/
                     return View(new Usuario());
                 }
             }
 
-            /*Caso os campos não esteja de acordo com a solicitação retorna a tela de login 
-            com as mensagem dos campos*/
             return View(login);
         }
 
-        // GET: Usuario/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
-
-        [Authorize(Roles = "Administrador")]
         public ActionResult Create()
         {
             return View();
         }
 
-        [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Login,Senha,Perfil,Ativo")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "Id,Nome,Login,Senha")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -124,13 +89,13 @@ namespace AdotaPet.WebApp.Controllers
                 usuario.Ativo = 'S';
                 db.Usuario.Add(usuario);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(usuario);
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "ADMINISTRADOR")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -145,7 +110,7 @@ namespace AdotaPet.WebApp.Controllers
             return View(usuario);
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Nome,Login,Senha,Perfil,Ativo")] Usuario usuario)
@@ -159,7 +124,7 @@ namespace AdotaPet.WebApp.Controllers
             return View(usuario);
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "ADMINISTRADOR")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -174,7 +139,7 @@ namespace AdotaPet.WebApp.Controllers
             return View(usuario);
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "ADMINISTRADOR")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

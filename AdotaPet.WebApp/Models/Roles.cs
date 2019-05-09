@@ -49,7 +49,7 @@ namespace AdotaPet.WebApp.Models
         {
             ApplicationContext db = new ApplicationContext();
 
-            string sRoles = db.Usuario.Where(p => p.Login == username).FirstOrDefault().Login;
+            string sRoles = db.Usuario.Where(p => p.Login == username).FirstOrDefault().Perfil.ToUpper();
             string[] retorno = { sRoles };
             return retorno;
 
