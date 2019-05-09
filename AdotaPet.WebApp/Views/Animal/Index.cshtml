@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Porte)
+            @Html.DisplayNameFor(model => model.Sexo)
         </th>
         <th></th>
     </tr>
@@ -31,8 +31,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.Nome)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Porte)
+        <td class="sexo">
+             @Html.DisplayFor(modelItem => item.Sexo)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -43,3 +43,18 @@
 }
 
 </table>
+<script>
+    window.onload = function () {
+        $.each($(".sexo"), function (indice, td) {
+            if (td.innerText == "F") {
+                td.innerText = "";
+                td.append("Femea");
+            } 
+            if (td.innerText == "M") {
+                td.innerText = "";
+                td.append("Macho");
+            } 
+        });
+
+    }
+    </script>
