@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<AdotaPet.WebApp.Models.Entities.Financeiro>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listagem financeiro";
 }
 
-<h2>Index</h2>
+<h2>Listagem de movimentação financeira</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Cadastrar movimentação", "Create", "Create", new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -20,7 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Valor)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Entrada_saida)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -35,9 +37,18 @@
             @Html.DisplayFor(modelItem => item.Valor)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @if (item.Entrada_saida == 'E')
+            {
+                <p>Recebimento</p>
+            }
+            else
+            {
+                <p>Pagamento</p>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
