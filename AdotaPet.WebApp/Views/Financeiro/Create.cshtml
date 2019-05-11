@@ -1,10 +1,10 @@
 ﻿@model AdotaPet.WebApp.Models.Entities.Financeiro
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Financeiro";
 }
 
-<h2>Create</h2>
+<h2>Cadastro de movimentação financeira</h2>
 
 
 
@@ -13,7 +13,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Financeiro</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -50,23 +49,22 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Cadastrar" class="btn btn-success" />
             </div>
         </div>
     </div>
 
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 @section Scripts {
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery.moneymask.js"></script>
     <script>
         window.onload = (function () {
+            $("#Valor").maskMoney({ prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false });;
+
             $("#Descricao").select();
             $("input:text,form").attr("autocomplete", "off");
             $.datepicker.regional['pt-BR'] = {

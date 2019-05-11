@@ -11,16 +11,16 @@ namespace AdotaPet.WebApp.Models.Entities
         [Required]
         public int Id { get; set; }
 
-        [Required, StringLength(200)]
+        [Required, StringLength(200)] [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
-        [Required] [Display(Name = "Data de Retorno")]
+        [Required] [Display(Name = "Data da movimentação")]
         public DateTime Data_movimentacao { get; set; }
 
-        [Required]
+        [Required] [Display(Name = "Tipo da movimentação")]
         public char Entrada_saida { get; set; }
 
-        [Required]
+        [Required] [Display(Name = "Valor")]
         public decimal Valor { get; set; }
 
         [Required]
