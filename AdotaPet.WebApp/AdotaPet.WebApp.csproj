@@ -210,7 +210,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Biblioteca\Geral.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -229,7 +228,6 @@
       <DependentUpon>20190512195844_atualizandoRacaObservacao.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
-    <Compile Include="Models\AdotaPetWebAppContext.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />
     <Compile Include="Models\Entities\Adocao_Itens.cs" />
     <Compile Include="Models\Entities\Animal.cs" />

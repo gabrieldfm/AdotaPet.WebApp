@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AdotaPet.WebApp.Biblioteca;
 using AdotaPet.WebApp.Models;
 using AdotaPet.WebApp.Models.Entities;
 
@@ -14,12 +13,16 @@ namespace AdotaPet.WebApp.Controllers
 {
     public class RacaController : Controller
     {
-        private AdotaPetWebAppContext db = new AdotaPetWebAppContext();
-        private Geral geral = new Geral();
+        private ApplicationContext db = new ApplicationContext();
+        
+        protected int ObterProximoCodigo()
+        {
+            return db.Raca.Count() > 0 ? new ApplicationContext().Raca.Where(x => x.Codigo > 0).Select(x => x.Codigo).Max() + 1 : 1;
+        }
         // GET: Raca
         public ActionResult Index()
         {
-            return View(db.Racas.ToList());
+            return View(db.Raca.ToList());
         }
 
         // GET: Raca/Details/5
@@ -29,7 +32,7 @@ namespace AdotaPet.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raca raca = db.Racas.Find(id);
+            Raca raca = db.Raca.Find(id);
             if (raca == null)
             {
                 return HttpNotFound();
@@ -52,8 +55,8 @@ namespace AdotaPet.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {               
-                raca.Codigo =  geral.obterProximoCodigo("racas");
-                db.Racas.Add(raca);
+                raca.Codigo = ObterProximoCodigo();
+                db.Raca.Add(raca);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -68,7 +71,7 @@ namespace AdotaPet.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raca raca = db.Racas.Find(id);
+            Raca raca = db.Raca.Find(id);
             if (raca == null)
             {
                 return HttpNotFound();
@@ -85,7 +88,7 @@ namespace AdotaPet.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(raca).State = EntityState.Modified;
+                db.Entry(raca).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -99,7 +102,7 @@ namespace AdotaPet.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Raca raca = db.Racas.Find(id);
+            Raca raca = db.Raca.Find(id);
             if (raca == null)
             {
                 return HttpNotFound();
@@ -112,8 +115,8 @@ namespace AdotaPet.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Raca raca = db.Racas.Find(id);
-            db.Racas.Remove(raca);
+            Raca raca = db.Raca.Find(id);
+            db.Raca.Remove(raca);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -129,7 +132,7 @@ namespace AdotaPet.WebApp.Controllers
         [HttpPost]
         public JsonResult obterCodigo()
         {           
-            return Json(geral.obterProximoCodigo("racas"), JsonRequestBehavior.AllowGet);
+            return Json(ObterProximoCodigo(), JsonRequestBehavior.AllowGet);
         }
     }
 }
