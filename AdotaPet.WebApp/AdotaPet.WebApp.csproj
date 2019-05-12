@@ -220,6 +220,14 @@
     <Compile Include="Migrations\20190501133655_InitialCreate.designer.cs">
       <DependentUpon>20190501133655_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190512185259_atualizaRaca.cs" />
+    <Compile Include="Migrations\20190512185259_atualizaRaca.designer.cs">
+      <DependentUpon>20190512185259_atualizaRaca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190512195844_atualizandoRacaObservacao.cs" />
+    <Compile Include="Migrations\20190512195844_atualizandoRacaObservacao.designer.cs">
+      <DependentUpon>20190512195844_atualizandoRacaObservacao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Models\AdotaPetWebAppContext.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />

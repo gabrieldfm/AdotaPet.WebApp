@@ -11,5 +11,10 @@ namespace AdotaPet.WebApp.Models.Entities
 
         [Required, StringLength(200)]
         public string Descricao { get; set; }
+
+        [StringLength(200)]
+        public string Observacao { get; set; }
+
+        public Ong Ong_Id { get; set; }
     }
 }
