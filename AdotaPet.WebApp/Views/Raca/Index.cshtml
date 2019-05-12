@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<AdotaPet.WebApp.Models.Entities.Raca>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listagem de raça";
 }
 
-<h2>Index</h2>
+<h2>Listagem de raça</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -16,6 +16,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Observacao)
         </th>
         <th></th>
     </tr>
@@ -29,9 +32,11 @@
             @Html.DisplayFor(modelItem => item.Descricao)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.Observacao)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

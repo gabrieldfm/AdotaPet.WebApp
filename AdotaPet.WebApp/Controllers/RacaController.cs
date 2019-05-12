@@ -51,7 +51,7 @@ namespace AdotaPet.WebApp.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Codigo,Descricao")] Raca raca)
+        public ActionResult Create([Bind(Include = "Id,Codigo,Descricao,Observacao,Ong_Id")] Raca raca)
         {
             if (ModelState.IsValid)
             {               
@@ -84,7 +84,7 @@ namespace AdotaPet.WebApp.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Codigo,Descricao")] Raca raca)
+        public ActionResult Edit([Bind(Include = "Id,Codigo,Descricao,Observacao,Ong_Id")] Raca raca)
         {
             if (ModelState.IsValid)
             {
