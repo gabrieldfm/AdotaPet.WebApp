@@ -219,6 +219,10 @@
     <Compile Include="Migrations\20190501133655_InitialCreate.designer.cs">
       <DependentUpon>20190501133655_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190512230045_atualizandoDoenca.cs" />
+    <Compile Include="Migrations\20190512230045_atualizandoDoenca.designer.cs">
+      <DependentUpon>20190512230045_atualizandoDoenca.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />
     <Compile Include="Models\Entities\Adocao_Itens.cs" />
