@@ -135,6 +135,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -210,8 +212,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Connected Services\Correios\Reference.cs" />
-    <Compile Include="Connected Services\Correios\Reference1.cs">
+    <Compile Include="Connected Services\wsCorreios\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -253,6 +254,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\AdotaPetWebAppContext-20190501145355.mdf" />
+    <Content Include="App_Data\AdotaPetWebAppContext-20190501145355_log.ldf">
+      <DependentUpon>AdotaPetWebAppContext-20190501145355.mdf</DependentUpon>
+    </Content>
     <Content Include="bin\AdotaPet.WebApp.dll.config" />
     <Content Include="bin\roslyn\csc.exe.config" />
     <Content Include="bin\roslyn\csc.rsp" />
@@ -264,12 +269,6 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <None Include="Connected Services\Correios\configuration.svcinfo" />
-    <None Include="Connected Services\Correios\configuration91.svcinfo" />
-    <None Include="Connected Services\Correios\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference1.cs</LastGenOutput>
-    </None>
     <Content Include="bin\AdotaPet.WebApp.dll" />
     <Content Include="bin\AdotaPet.WebApp.pdb" />
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -484,6 +483,150 @@
     <Content Include="bin\System.Xml.XPath.XDocument.dll" />
     <Content Include="bin\WebActivatorEx.dll" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.atualizaPagamentoNaEntregaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.atualizaRemessaAgrupadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.bloquearObjetoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaContratoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaDataAtualResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaPagamentoEntregaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaServicosAdicionaisAtivosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaServicosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaServicosValorDeclaradoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaServicosXServicosAdicionaisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaTarifaValeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.calculaTarifaServicoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.cancelarObjetoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.cancelarPedidoScolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.clienteERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.consultaCEPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.consultaSROResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.consultaSRO_NEWResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.contratoERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.embalagemLRSMaster.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.enderecoERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.fechaPlpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.fechaPlpVariosServicosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.geraDigitoVerificadorEtiquetasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.getStatusCartaoPostagemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.getStatusPLPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.integrarUsuarioScolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.obterClienteAtualizacaoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.obterEmbalagemLRSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.retornoCancelamento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.servicoAdicionalXML.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.servicoERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.solicitaEtiquetasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.solicitaPLPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.solicitarPostagemScolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.solicitaXmlPlpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.statusCartao.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.statusPlp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.valePostal.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.validaEtiquetaPLPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.validaPlpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.validarPostagemReversaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.validarPostagemSimultaneaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.verificaDisponibilidadeServicoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.VerificaSeTodosObjetosCanceladosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\wsCorreios\configuration91.svcinfo" />
+    <None Include="Connected Services\wsCorreios\configuration.svcinfo" />
+    <None Include="Connected Services\wsCorreios\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -504,53 +647,7 @@
     <Content Include="obj\Debug_E\AdotaPet.WebApp.dll.config" />
     <Content Include="obj\Debug_E\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Release\AdotaPet.WebApp.csproj.CoreCompileInputs.cache" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.atualizaPagamentoNaEntregaResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.atualizaRemessaAgrupadaResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.bloquearObjetoResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.buscaClienteResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.buscaContratoResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.buscaDataAtualResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.buscaPagamentoEntregaResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.buscaServicosAdicionaisAtivosResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.buscaServicosResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.buscaServicosValorDeclaradoResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.buscaServicosXServicosAdicionaisResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.buscaTarifaValeResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.calculaTarifaServicoResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.cancelarObjetoResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.cancelarPedidoScolResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.clienteERP.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.consultaCEPResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.consultaSROResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.consultaSRO_NEWResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.contratoERP.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.embalagemLRSMaster.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.enderecoERP.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.fechaPlpResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.fechaPlpVariosServicosResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.geraDigitoVerificadorEtiquetasResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.getStatusCartaoPostagemResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.getStatusPLPResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.integrarUsuarioScolResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.obterClienteAtualizacaoResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.obterEmbalagemLRSResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.retornoCancelamento.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.servicoAdicionalXML.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.servicoERP.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.solicitaEtiquetasResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.solicitaPLPResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.solicitarPostagemScolResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.solicitaXmlPlpResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.statusCartao.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.statusPlp.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.valePostal.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.validaEtiquetaPLPResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.validaPlpResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.validarPostagemReversaResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.validarPostagemSimultaneaResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.verificaDisponibilidadeServicoResponse.datasource" />
-    <Content Include="Connected Services\Correios\AdotaPet.WebApp.Correios.VerificaSeTodosObjetosCanceladosResponse.datasource" />
-    <None Include="Connected Services\Correios\AtendeClienteService.wsdl" />
+    <None Include="Connected Services\wsCorreios\AtendeClienteService.wsdl" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -588,7 +685,7 @@
     <Content Include="Views\Endereco\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <WCFMetadataStorage Include="Connected Services\wsCorreios\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -602,6 +699,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
