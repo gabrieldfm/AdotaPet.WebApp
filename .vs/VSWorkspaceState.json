@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\AdotaPet.WebApp\\Controllers",
-    "\\AdotaPet.WebApp\\Migrations"
+    "\\AdotaPet.WebApp\\Models",
+    "\\AdotaPet.WebApp\\Models\\Entities"
   ],
-  "SelectedNode": "\\AdotaPet.WebApp",
+  "SelectedNode": "\\AdotaPet.WebApp.sln",
   "PreviewInSolutionExplorer": false
 }

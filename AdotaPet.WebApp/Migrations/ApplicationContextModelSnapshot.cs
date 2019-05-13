@@ -234,7 +234,14 @@ namespace AdotaPet.WebApp.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
+                    b.Property<string>("Observacao")
+                        .HasMaxLength(200);
+
+                    b.Property<int?>("Ong_IdId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Ong_IdId");
 
                     b.ToTable("Raca");
                 });
@@ -330,6 +337,13 @@ namespace AdotaPet.WebApp.Migrations
                         .WithMany()
                         .HasForeignKey("Ong_IdId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Raca", b =>
+                {
+                    b.HasOne("AdotaPet.WebApp.Models.Entities.Ong", "Ong_Id")
+                        .WithMany()
+                        .HasForeignKey("Ong_IdId");
                 });
 #pragma warning restore 612, 618
         }
