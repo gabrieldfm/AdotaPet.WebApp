@@ -17,6 +17,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("AdotaPet", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Login", "Login", "Usuario", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -24,6 +25,8 @@
                     <li>@Html.ActionLink("Animais", "Index", "Home")</li>
                     <li>@Html.ActionLink("Colaboradores", "Index", "Home")</li>
                     <li>@Html.ActionLink("Doadores", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Ongs", "Index", "Ong")</li>
+                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
                 </ul>
             </div>
         </div>
