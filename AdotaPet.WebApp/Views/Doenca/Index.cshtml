@@ -7,7 +7,7 @@
 <h2>Listagem de doença</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Cadastrar doença", "Create" ,"Create", new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -29,8 +29,8 @@
             @Html.DisplayFor(modelItem => item.Descricao)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Deletar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }
