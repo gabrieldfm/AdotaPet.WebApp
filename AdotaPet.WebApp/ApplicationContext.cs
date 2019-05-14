@@ -26,7 +26,7 @@ namespace AdotaPet.WebApp
             optionsBuilder.UseSqlServer("Data Source=LAPTOP-5P677KP4;Initial Catalog=Db_AdotaPet;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 #endif
 #if Debug_E
-            optionsBuilder.UseSqlServer("Data Source=LAPTOP-5P677KP4;Initial Catalog=Db_AdotaPet;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Db_AdotaPet;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 #endif
         }
     }

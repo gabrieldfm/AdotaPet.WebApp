@@ -135,6 +135,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -210,15 +212,30 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Connected Services\wsCorreios\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OngController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\20190505224121_criacao.cs" />
     <Compile Include="Migrations\20190505224121_criacao.designer.cs">
       <DependentUpon>20190505224121_criacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190512185259_atualizaRaca.cs" />
+    <Compile Include="Migrations\20190512185259_atualizaRaca.designer.cs">
+      <DependentUpon>20190512185259_atualizaRaca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190512195844_atualizandoRacaObservacao.cs" />
+    <Compile Include="Migrations\20190512195844_atualizandoRacaObservacao.designer.cs">
+      <DependentUpon>20190512195844_atualizandoRacaObservacao.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />
@@ -230,11 +247,382 @@
     <Compile Include="Models\Entities\Pessoa.cs" />
     <Compile Include="Models\Entities\Raca.cs" />
     <Compile Include="Models\Entities\Usuario.cs" />
-    <Compile Include="Models\Roles.cs" />
-    <Compile Include="Models\ViewModels\OngViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\AdotaPetWebAppContext-20190501145355.mdf" />
+    <Content Include="App_Data\AdotaPetWebAppContext-20190501145355_log.ldf">
+      <DependentUpon>AdotaPetWebAppContext-20190501145355.mdf</DependentUpon>
+    </Content>
+    <Content Include="bin\AdotaPet.WebApp.dll.config" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="bin\AdotaPet.WebApp.dll" />
+    <Content Include="bin\AdotaPet.WebApp.pdb" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\Microsoft.AspNet.TelemetryCorrelation.dll" />
+    <Content Include="bin\Microsoft.AspNet.TelemetryCorrelation.xml" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\Microsoft.EntityFrameworkCore.Abstractions.dll" />
+    <Content Include="bin\Microsoft.EntityFrameworkCore.Abstractions.xml" />
+    <Content Include="bin\Microsoft.EntityFrameworkCore.Design.dll" />
+    <Content Include="bin\Microsoft.EntityFrameworkCore.Design.xml" />
+    <Content Include="bin\Microsoft.EntityFrameworkCore.dll" />
+    <Content Include="bin\Microsoft.EntityFrameworkCore.Relational.dll" />
+    <Content Include="bin\Microsoft.EntityFrameworkCore.Relational.xml" />
+    <Content Include="bin\Microsoft.EntityFrameworkCore.SqlServer.dll" />
+    <Content Include="bin\Microsoft.EntityFrameworkCore.SqlServer.xml" />
+    <Content Include="bin\Microsoft.EntityFrameworkCore.xml" />
+    <Content Include="bin\Microsoft.Extensions.Caching.Abstractions.dll" />
+    <Content Include="bin\Microsoft.Extensions.Caching.Abstractions.xml" />
+    <Content Include="bin\Microsoft.Extensions.Caching.Memory.dll" />
+    <Content Include="bin\Microsoft.Extensions.Caching.Memory.xml" />
+    <Content Include="bin\Microsoft.Extensions.Configuration.Abstractions.dll" />
+    <Content Include="bin\Microsoft.Extensions.Configuration.Abstractions.xml" />
+    <Content Include="bin\Microsoft.Extensions.Configuration.Binder.dll" />
+    <Content Include="bin\Microsoft.Extensions.Configuration.Binder.xml" />
+    <Content Include="bin\Microsoft.Extensions.Configuration.dll" />
+    <Content Include="bin\Microsoft.Extensions.Configuration.xml" />
+    <Content Include="bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <Content Include="bin\Microsoft.Extensions.DependencyInjection.Abstractions.xml" />
+    <Content Include="bin\Microsoft.Extensions.DependencyInjection.dll" />
+    <Content Include="bin\Microsoft.Extensions.DependencyInjection.xml" />
+    <Content Include="bin\Microsoft.Extensions.Logging.Abstractions.dll" />
+    <Content Include="bin\Microsoft.Extensions.Logging.Abstractions.xml" />
+    <Content Include="bin\Microsoft.Extensions.Logging.dll" />
+    <Content Include="bin\Microsoft.Extensions.Logging.xml" />
+    <Content Include="bin\Microsoft.Extensions.Options.dll" />
+    <Content Include="bin\Microsoft.Extensions.Options.xml" />
+    <Content Include="bin\Microsoft.Extensions.Primitives.dll" />
+    <Content Include="bin\Microsoft.Extensions.Primitives.xml" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\netstandard.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\pt-br\System.Web.Mvc.resources.dll" />
+    <Content Include="bin\Remotion.Linq.dll" />
+    <Content Include="bin\Remotion.Linq.xml" />
+    <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="bin\roslyn\System.AppContext.dll" />
+    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Console.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\roslyn\System.IO.Pipes.AccessControl.dll" />
+    <Content Include="bin\roslyn\System.IO.Pipes.dll" />
+    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\roslyn\System.Security.AccessControl.dll" />
+    <Content Include="bin\roslyn\System.Security.Claims.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\roslyn\System.Security.Principal.Windows.dll" />
+    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\roslyn\System.ValueTuple.dll" />
+    <Content Include="bin\roslyn\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\roslyn\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
+    <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\System.AppContext.dll" />
+    <Content Include="bin\System.Buffers.dll" />
+    <Content Include="bin\System.Buffers.xml" />
+    <Content Include="bin\System.Collections.Concurrent.dll" />
+    <Content Include="bin\System.Collections.dll" />
+    <Content Include="bin\System.Collections.Immutable.dll" />
+    <Content Include="bin\System.Collections.Immutable.xml" />
+    <Content Include="bin\System.Collections.NonGeneric.dll" />
+    <Content Include="bin\System.Collections.Specialized.dll" />
+    <Content Include="bin\System.ComponentModel.Annotations.dll" />
+    <Content Include="bin\System.ComponentModel.dll" />
+    <Content Include="bin\System.ComponentModel.EventBasedAsync.dll" />
+    <Content Include="bin\System.ComponentModel.Primitives.dll" />
+    <Content Include="bin\System.ComponentModel.TypeConverter.dll" />
+    <Content Include="bin\System.Console.dll" />
+    <Content Include="bin\System.Data.Common.dll" />
+    <Content Include="bin\System.Data.SqlClient.dll" />
+    <Content Include="bin\System.Diagnostics.Contracts.dll" />
+    <Content Include="bin\System.Diagnostics.Debug.dll" />
+    <Content Include="bin\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="bin\System.Diagnostics.DiagnosticSource.xml" />
+    <Content Include="bin\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\System.Diagnostics.Process.dll" />
+    <Content Include="bin\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\System.Diagnostics.TextWriterTraceListener.dll" />
+    <Content Include="bin\System.Diagnostics.Tools.dll" />
+    <Content Include="bin\System.Diagnostics.TraceSource.dll" />
+    <Content Include="bin\System.Diagnostics.Tracing.dll" />
+    <Content Include="bin\System.Drawing.Primitives.dll" />
+    <Content Include="bin\System.Dynamic.Runtime.dll" />
+    <Content Include="bin\System.Globalization.Calendars.dll" />
+    <Content Include="bin\System.Globalization.dll" />
+    <Content Include="bin\System.Globalization.Extensions.dll" />
+    <Content Include="bin\System.Interactive.Async.dll" />
+    <Content Include="bin\System.Interactive.Async.xml" />
+    <Content Include="bin\System.IO.Compression.dll" />
+    <Content Include="bin\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\System.IO.dll" />
+    <Content Include="bin\System.IO.FileSystem.dll" />
+    <Content Include="bin\System.IO.FileSystem.DriveInfo.dll" />
+    <Content Include="bin\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\System.IO.FileSystem.Watcher.dll" />
+    <Content Include="bin\System.IO.IsolatedStorage.dll" />
+    <Content Include="bin\System.IO.MemoryMappedFiles.dll" />
+    <Content Include="bin\System.IO.Pipes.dll" />
+    <Content Include="bin\System.IO.UnmanagedMemoryStream.dll" />
+    <Content Include="bin\System.Linq.dll" />
+    <Content Include="bin\System.Linq.Expressions.dll" />
+    <Content Include="bin\System.Linq.Parallel.dll" />
+    <Content Include="bin\System.Linq.Queryable.dll" />
+    <Content Include="bin\System.Memory.dll" />
+    <Content Include="bin\System.Memory.xml" />
+    <Content Include="bin\System.Net.Http.dll" />
+    <Content Include="bin\System.Net.NameResolution.dll" />
+    <Content Include="bin\System.Net.NetworkInformation.dll" />
+    <Content Include="bin\System.Net.Ping.dll" />
+    <Content Include="bin\System.Net.Primitives.dll" />
+    <Content Include="bin\System.Net.Requests.dll" />
+    <Content Include="bin\System.Net.Security.dll" />
+    <Content Include="bin\System.Net.Sockets.dll" />
+    <Content Include="bin\System.Net.WebHeaderCollection.dll" />
+    <Content Include="bin\System.Net.WebSockets.Client.dll" />
+    <Content Include="bin\System.Net.WebSockets.dll" />
+    <Content Include="bin\System.Numerics.Vectors.dll" />
+    <Content Include="bin\System.Numerics.Vectors.xml" />
+    <Content Include="bin\System.ObjectModel.dll" />
+    <Content Include="bin\System.Reflection.dll" />
+    <Content Include="bin\System.Reflection.Extensions.dll" />
+    <Content Include="bin\System.Reflection.Primitives.dll" />
+    <Content Include="bin\System.Resources.Reader.dll" />
+    <Content Include="bin\System.Resources.ResourceManager.dll" />
+    <Content Include="bin\System.Resources.Writer.dll" />
+    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="bin\System.Runtime.CompilerServices.VisualC.dll" />
+    <Content Include="bin\System.Runtime.dll" />
+    <Content Include="bin\System.Runtime.Extensions.dll" />
+    <Content Include="bin\System.Runtime.Handles.dll" />
+    <Content Include="bin\System.Runtime.InteropServices.dll" />
+    <Content Include="bin\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\System.Runtime.Numerics.dll" />
+    <Content Include="bin\System.Runtime.Serialization.Formatters.dll" />
+    <Content Include="bin\System.Runtime.Serialization.Json.dll" />
+    <Content Include="bin\System.Runtime.Serialization.Primitives.dll" />
+    <Content Include="bin\System.Runtime.Serialization.Xml.dll" />
+    <Content Include="bin\System.Security.Claims.dll" />
+    <Content Include="bin\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\System.Security.Cryptography.Csp.dll" />
+    <Content Include="bin\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\System.Security.Principal.dll" />
+    <Content Include="bin\System.Security.SecureString.dll" />
+    <Content Include="bin\System.Text.Encoding.dll" />
+    <Content Include="bin\System.Text.Encoding.Extensions.dll" />
+    <Content Include="bin\System.Text.RegularExpressions.dll" />
+    <Content Include="bin\System.Threading.dll" />
+    <Content Include="bin\System.Threading.Overlapped.dll" />
+    <Content Include="bin\System.Threading.Tasks.dll" />
+    <Content Include="bin\System.Threading.Tasks.Parallel.dll" />
+    <Content Include="bin\System.Threading.Thread.dll" />
+    <Content Include="bin\System.Threading.ThreadPool.dll" />
+    <Content Include="bin\System.Threading.Timer.dll" />
+    <Content Include="bin\System.ValueTuple.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Optimization.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
+    <Content Include="bin\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\System.Xml.XDocument.dll" />
+    <Content Include="bin\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\System.Xml.XmlSerializer.dll" />
+    <Content Include="bin\System.Xml.XPath.dll" />
+    <Content Include="bin\System.Xml.XPath.XDocument.dll" />
+    <Content Include="bin\WebActivatorEx.dll" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.atualizaPagamentoNaEntregaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.atualizaRemessaAgrupadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.bloquearObjetoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaContratoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaDataAtualResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaPagamentoEntregaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaServicosAdicionaisAtivosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaServicosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaServicosValorDeclaradoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaServicosXServicosAdicionaisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.buscaTarifaValeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.calculaTarifaServicoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.cancelarObjetoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.cancelarPedidoScolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.clienteERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.consultaCEPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.consultaSROResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.consultaSRO_NEWResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.contratoERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.embalagemLRSMaster.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.enderecoERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.fechaPlpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.fechaPlpVariosServicosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.geraDigitoVerificadorEtiquetasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.getStatusCartaoPostagemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.getStatusPLPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.integrarUsuarioScolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.obterClienteAtualizacaoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.obterEmbalagemLRSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.retornoCancelamento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.servicoAdicionalXML.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.servicoERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.solicitaEtiquetasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.solicitaPLPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.solicitarPostagemScolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.solicitaXmlPlpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.statusCartao.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.statusPlp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.valePostal.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.validaEtiquetaPLPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.validaPlpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.validarPostagemReversaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.validarPostagemSimultaneaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.verificaDisponibilidadeServicoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\wsCorreios\AdotaPet.WebApp.wsCorreios.VerificaSeTodosObjetosCanceladosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\wsCorreios\configuration91.svcinfo" />
+    <None Include="Connected Services\wsCorreios\configuration.svcinfo" />
+    <None Include="Connected Services\wsCorreios\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -243,8 +631,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="obj\Debug_E\AdotaPet.WebApp.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug_E\AdotaPet.WebApp.dll" />
+    <Content Include="obj\Debug_E\AdotaPet.WebApp.pdb" />
+    <Content Include="obj\Debug_E\TempPE\Connected Services.Correios.Reference.cs.dll" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="obj\Debug_E\AdotaPet.WebApp.csproj.CopyComplete" />
+    <Content Include="obj\Debug_E\AdotaPet.WebApp.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug_E\AdotaPet.WebApp.csprojAssemblyReference.cache" />
+    <Content Include="obj\Debug_E\AdotaPet.WebApp.dll.config" />
+    <Content Include="obj\Debug_E\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Release\AdotaPet.WebApp.csproj.CoreCompileInputs.cache" />
+    <None Include="Connected Services\wsCorreios\AtendeClienteService.wsdl" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -263,34 +662,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Usuario\Create.cshtml" />
-    <Content Include="Views\Usuario\Delete.cshtml" />
-    <Content Include="Views\Usuario\Login.cshtml" />
-    <Content Include="web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Views\Usuario\Edit.cshtml" />
-    <Content Include="Views\Usuario\Index.cshtml" />
-    <Content Include="Views\Ong\Create.cshtml" />
-    <Content Include="Views\Ong\Delete.cshtml" />
-    <Content Include="Views\Ong\Details.cshtml" />
-    <Content Include="Views\Ong\Edit.cshtml" />
-    <Content Include="Views\Ong\Index.cshtml" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Debug_E.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Debug_G.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <WCFMetadataStorage Include="Connected Services\wsCorreios\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -304,6 +678,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
