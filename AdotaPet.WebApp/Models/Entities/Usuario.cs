@@ -20,5 +20,6 @@ namespace AdotaPet.WebApp.Models.Entities
         public string Perfil { get; set; }
 
         public char Ativo { get; set; }
+
     }
 }

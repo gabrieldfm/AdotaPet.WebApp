@@ -1,0 +1,50 @@
+﻿@model AdotaPet.WebApp.Models.Entities.Ong
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Razao_Social)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Razao_Social)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome_Fantasia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome_Fantasia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cnpj)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cnpj)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

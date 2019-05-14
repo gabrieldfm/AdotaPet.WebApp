@@ -18,6 +18,6 @@ namespace AdotaPet.WebApp.Models.Entities
 
         [Required, StringLength(30)]
         public string Cep { get; set; }
-        
+
     }
 }
