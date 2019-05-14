@@ -15,5 +15,11 @@ namespace AdotaPet.WebApp.Models.Entities
 
         [Required, StringLength(200)]
         public string Senha { get; set; }
+
+        [StringLength(15)]
+        public string Perfil { get; set; }
+
+        public char Ativo { get; set; }
+
     }
 }

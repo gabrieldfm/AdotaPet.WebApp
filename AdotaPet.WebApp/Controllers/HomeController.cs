@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace AdotaPet.WebApp.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -13,6 +14,7 @@ namespace AdotaPet.WebApp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "ADMINISTRADOR")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -20,6 +22,7 @@ namespace AdotaPet.WebApp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "USUARIO")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

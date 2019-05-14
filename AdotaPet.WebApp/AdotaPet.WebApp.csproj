@@ -219,13 +219,15 @@
     </Compile>
     <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OngController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20190501133655_InitialCreate.cs" />
-    <Compile Include="Migrations\20190501133655_InitialCreate.designer.cs">
-      <DependentUpon>20190501133655_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20190505224121_criacao.cs" />
+    <Compile Include="Migrations\20190505224121_criacao.designer.cs">
+      <DependentUpon>20190505224121_criacao.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\20190512185259_atualizaRaca.cs" />
     <Compile Include="Migrations\20190512185259_atualizaRaca.designer.cs">
@@ -245,12 +247,6 @@
     <Compile Include="Models\Entities\Pessoa.cs" />
     <Compile Include="Models\Entities\Raca.cs" />
     <Compile Include="Models\Entities\Usuario.cs" />
-    <Compile Include="obj\Debug_E\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug_E\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug_E\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="obj\Debug_G\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug_G\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug_G\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -659,13 +655,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -673,16 +662,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Raca\Create.cshtml" />
-    <Content Include="Views\Raca\Delete.cshtml" />
-    <Content Include="Views\Raca\Details.cshtml" />
-    <Content Include="Views\Raca\Edit.cshtml" />
-    <Content Include="Views\Raca\Index.cshtml" />
-    <Content Include="Views\Endereco\Create.cshtml" />
-    <Content Include="Views\Endereco\Delete.cshtml" />
-    <Content Include="Views\Endereco\Details.cshtml" />
-    <Content Include="Views\Endereco\Edit.cshtml" />
-    <Content Include="Views\Endereco\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\wsCorreios\" />

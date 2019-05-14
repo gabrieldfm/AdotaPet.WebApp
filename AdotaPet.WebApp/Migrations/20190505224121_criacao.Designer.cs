@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdotaPet.WebApp.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190501133655_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190505224121_criacao")]
+    partial class criacao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -247,6 +247,10 @@ namespace AdotaPet.WebApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Ativo")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
+
                     b.Property<string>("Login")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -254,6 +258,10 @@ namespace AdotaPet.WebApp.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasMaxLength(15);
 
                     b.Property<string>("Senha")
                         .IsRequired()

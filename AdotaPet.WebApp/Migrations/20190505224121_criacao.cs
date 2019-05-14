@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AdotaPet.WebApp.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class criacao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,7 +60,9 @@ namespace AdotaPet.WebApp.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(maxLength: 50, nullable: false),
                     Login = table.Column<string>(maxLength: 100, nullable: false),
-                    Senha = table.Column<string>(maxLength: 200, nullable: false)
+                    Senha = table.Column<string>(maxLength: 200, nullable: false),
+                    Perfil = table.Column<string>(maxLength: 15, nullable: false),
+                    Ativo = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
