@@ -33,14 +33,7 @@
 </div>  
 
 
-<div class="col-md-3">
-    <div class="row">
-        <br /> <br /> <br />
-        <label>Saldo no período</label>
-        <input id="Saldo_total" name="txtTotal" type="text" class="form-control" disabled="disabled">
-        <br/>
-    </div>   
-</div>      
+      
    
 <table class="table">
     <tr>
@@ -93,12 +86,38 @@
     @Html.ActionLink("Cadastrar movimentação", "Create", "Create", new { @class = "btn btn-primary" })
 </p>
 
-        <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+       
         @section Scripts {
             <script src="~/Scripts/jquery-3.3.1.min.js"></script>
             <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
             <script>
                 window.onload = (function () {
+                    $("#Pesquisar").click(function () {
+                        alert("teste");
+                        sugerirEndereco();
+                    });
+                    //TESTE
+                    function sugerirEndereco() {
+                        var obj = {
+                            "inicio": $("#Data_inicial").val(),
+                            "fim": $("#Data_final").val()
+                        }
+                        var cep = $("#Cep").val();
+                        $.ajax({
+                            type: "POST",
+                            url: "/Financeiro/Teste",
+                            data: JSON.stringify(obj),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (resposta) {
+
+                            },
+                            error: function (obj) {
+                                alert("Erro inesperado entre em contato com o suporte tecnico.");
+
+                            }
+                        });
+                    }
                     $("input:text,form").attr("autocomplete", "off");
                     $.datepicker.regional['pt-BR'] = {
                         closeText: 'Fechar',
@@ -125,6 +144,8 @@
                 $(function () {
                     $("#Data_inicial").datepicker($.datepicker.regional["pt-BR"]);
                     $("#Data_final").datepicker($.datepicker.regional["pt-BR"]);
+                    $("#Data_inicial").val("01/01/2019");
+                    $("#Data_final").val("31/12/2019");
                 });
             </script>
         }

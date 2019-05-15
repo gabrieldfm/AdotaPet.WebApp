@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using AdotaPet.WebApp.Models;
 using AdotaPet.WebApp.Models.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.cl
 
 namespace AdotaPet.WebApp.Controllers
 {
@@ -19,6 +21,19 @@ namespace AdotaPet.WebApp.Controllers
         public ActionResult Index()
         {
             return View(db.Financeiro.ToList());
+        }
+
+         [HttpPost]
+        public JsonResult Teste(string inicio, string fim, string movimentacao)
+        {
+            var Filtro = (movimentacao != "T") ? "and movimentacao = '" + movimentacao + "'" : "";
+            var TotalEntrada = db.Financeiro.Where(f => f.Entrada_saida == 'E').Select(f => f.Valor).Sum();
+            var TotalSaida = db.Financeiro.Where(f => f.Entrada_saida == 'S').Select(f => f.Valor).Sum();
+            var Lista = new
+            {
+                itens = db.Financeiro.Fromsql
+            }
+            return Json(inicio,JsonRequestBehavior.AllowGet);
         }
 
         // GET: Financeiro/Details/5
