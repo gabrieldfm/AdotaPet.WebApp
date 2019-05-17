@@ -12,7 +12,8 @@ namespace AdotaPet.WebApp
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/RequiredPtBr.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -25,6 +26,16 @@ namespace AdotaPet.WebApp
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+            "~/Scripts/Site.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+            "~/Scripts/jquery-ui-{version}.js",
+            "~/Scripts/jquery.inputmask/jquery.inputmask.js",
+            "~/Scripts/jquery-ui-i18n.js"));
+            bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+            "~/Content/themes/base/all.css"));
+
         }
     }
 }

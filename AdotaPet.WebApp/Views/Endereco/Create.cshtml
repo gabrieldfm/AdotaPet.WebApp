@@ -86,6 +86,7 @@
             });
         }
         function sugerirEndereco() {
+            $("input:text,form").attr("autocomplete", "off");
             $("#Complemento").val(".");
             var cep = $("#Cep").val();
             $.ajax({
