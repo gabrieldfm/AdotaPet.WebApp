@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using AdotaPet.WebApp.Models;
 using AdotaPet.WebApp.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.cl
 
 namespace AdotaPet.WebApp.Controllers
 {
@@ -24,16 +23,18 @@ namespace AdotaPet.WebApp.Controllers
         }
 
          [HttpPost]
-        public JsonResult Teste(string inicio, string fim, string movimentacao)
+        public JsonResult Pesquisa(string inicio, string fim, string movimentacao)
         {
-            var Filtro = (movimentacao != "T") ? "and movimentacao = '" + movimentacao + "'" : "";
+            var Filtro = (movimentacao != "T") ? " and entrada_saida = '" + movimentacao + "'" : "";
             var TotalEntrada = db.Financeiro.Where(f => f.Entrada_saida == 'E').Select(f => f.Valor).Sum();
             var TotalSaida = db.Financeiro.Where(f => f.Entrada_saida == 'S').Select(f => f.Valor).Sum();
+
             var Lista = new
             {
-                itens = db.Financeiro.Fromsql
-            }
-            return Json(inicio,JsonRequestBehavior.AllowGet);
+                itens = db.Financeiro.FromSql("SELECT * FROM  FINANCEIRO WHERE data_movimentacao BETWEEN '" + inicio + "' AND '" + fim +"'"+ Filtro).ToList(),
+                total = (TotalEntrada - TotalSaida)
+            };
+            return Json(Lista,JsonRequestBehavior.AllowGet);
         }
 
         // GET: Financeiro/Details/5
@@ -66,7 +67,7 @@ namespace AdotaPet.WebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-
+                decimal teste = financeiro.Valor;
                 financeiro.Ong_Id = db.Ong.Find(1);
                 db.Financeiro.Add(financeiro);
                 db.SaveChanges();

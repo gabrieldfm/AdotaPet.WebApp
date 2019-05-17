@@ -10,7 +10,7 @@
     <label>Data inicial</label>
     <input id="Data_inicial" name="Inicial" type="text" class="form-control" data-date-format="dd/mm/yyyy" data-date-autoclose="true">
 </div>
-        
+
 <div class="col-md-3">
     <label>Data final</label>
     <input id="Data_final" name="Final" type="text" class="form-control" data-date-format="dd/mm/yyyy" data-date-autoclose="true">
@@ -23,19 +23,26 @@
         <option value="E">Recebimento</option>
         <option value="S">Pagamento</option>
     </select>
-</div>        
+</div>
 
-<br/>
+<br />
 <div class="col-md-2">
     <button id="Pesquisar" type="button" name="btnPesquisar" class="btn btn-success btn-info" style="float: right">
         <span> Pesquisar</span> <i class="glyphicon glyphicon-search" "=" "></i>
     </button>
-</div>  
+</div>
 
 
-      
-   
-<table class="table">
+<div class="col-md-12" style ="margin-top:100px">
+    <div class="row">
+        <p>
+            @Html.ActionLink("Cadastrar movimentação", "Create", "Create", new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>
+
+
+<table class="table" id="tabela" style="margin-top: 100px">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Descricao)
@@ -51,101 +58,90 @@
         </th>
 
     </tr>
-    
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data_movimentacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Valor)
-            </td>
-            <td>
-                @if (item.Entrada_saida == 'E')
-                {
-                    <p>Recebimento</p>
-                }
-                else
-                {
-                    <p>Pagamento</p>
-                }
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
-                @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-            </td>
-        </tr>
-    }
-
 </table>
-<p>
-    @Html.ActionLink("Cadastrar movimentação", "Create", "Create", new { @class = "btn btn-primary" })
-</p>
 
-       
-        @section Scripts {
-            <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-            <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-            <script>
-                window.onload = (function () {
-                    $("#Pesquisar").click(function () {
-                        alert("teste");
-                        sugerirEndereco();
-                    });
-                    //TESTE
-                    function sugerirEndereco() {
-                        var obj = {
-                            "inicio": $("#Data_inicial").val(),
-                            "fim": $("#Data_final").val()
-                        }
-                        var cep = $("#Cep").val();
-                        $.ajax({
-                            type: "POST",
-                            url: "/Financeiro/Teste",
-                            data: JSON.stringify(obj),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (resposta) {
+<div class="col-md-3">
 
-                            },
-                            error: function (obj) {
-                                alert("Erro inesperado entre em contato com o suporte tecnico.");
+    <br /> <br /> <br />
+    <label>Saldo total disponível</label>
+    <input id="Saldo_total" name="txtTotal" type="text" class="form-control" disabled="disabled">
+    <br />
 
-                            }
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        window.onload = (function () {
+            $("#Pesquisar").click(function () {
+                pesquisar();
+            });
+            //PESQUISAR
+            function pesquisar() {
+                var obj = {
+                    "inicio": $("#Data_inicial").val(),
+                    "fim": $("#Data_final").val(),
+                    "movimentacao": $("#Categoria").val()
+                }
+                var cep = $("#Cep").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Financeiro/Pesquisa",
+                    data: JSON.stringify(obj),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (resposta) {
+                        var tabela = $("#tabela");
+                        var corpoTabela = $("#corpoTabela");
+                        $(".remove").each(function () {
+                            $(this).remove();
+                        })
+                        $.each(resposta.itens, function (indice, itens) {
+                            var tr = $("<tr>").addClass("remove");
+                            var converte_data = new Date(Number(this.Data_movimentacao.match(/(\d)+/)[0])).toLocaleDateString();
+                            tr.append($("<td>").text((this.Descricao)));
+                            tr.append($("<td>").text((converte_data)));
+                            tr.append($("<td>").text((this.Valor)));
+                            tr.append($("<td>").text((this.Entrada_saida == "E" ? "Recebimento" : "Pagamento")));
+                            tabela.append(tr);
                         });
+                        $("#Saldo_total").val(resposta.total);
+                    },
+                    error: function (obj) {
+                        alert("Erro inesperado entre em contato com o suporte tecnico.");
+
                     }
-                    $("input:text,form").attr("autocomplete", "off");
-                    $.datepicker.regional['pt-BR'] = {
-                        closeText: 'Fechar',
-                        prevText: '&#x3c;Anterior',
-                        nextText: 'Pr&oacute;ximo&#x3e;',
-                        currentText: 'Hoje',
-                        monthNames: ['Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril', 'Maio', 'Junho',
-                            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-                            'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                        dayNames: ['Domingo', 'Segunda-feira', 'Ter&ccedil;a-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado'],
-                        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-                        dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-                        weekHeader: 'Sm',
-                        dateFormat: 'dd/mm/yy',
-                        firstDay: 0,
-                        isRTL: false,
-                        showMonthAfterYear: false,
-                        yearSuffix: ''
-                    };
-                    $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
                 });
-                // Função Datepicker chama a primeira que faz a conversão para português
-                $(function () {
-                    $("#Data_inicial").datepicker($.datepicker.regional["pt-BR"]);
-                    $("#Data_final").datepicker($.datepicker.regional["pt-BR"]);
-                    $("#Data_inicial").val("01/01/2019");
-                    $("#Data_final").val("31/12/2019");
-                });
-            </script>
-        }
+            }
+            $("input:text,form").attr("autocomplete", "off");
+            $.datepicker.regional['pt-BR'] = {
+                closeText: 'Fechar',
+                prevText: '&#x3c;Anterior',
+                nextText: 'Pr&oacute;ximo&#x3e;',
+                currentText: 'Hoje',
+                monthNames: ['Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril', 'Maio', 'Junho',
+                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+                    'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda-feira', 'Ter&ccedil;a-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sabado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
+        });
+        // Função Datepicker chama a primeira que faz a conversão para português
+        $(function () {
+            $("#Data_inicial").datepicker($.datepicker.regional["pt-BR"]);
+            $("#Data_final").datepicker($.datepicker.regional["pt-BR"]);
+            $("#Data_inicial").val("01/01/2019");
+            $("#Data_final").val("31/12/2019");
+        });
+    </script>
+}
