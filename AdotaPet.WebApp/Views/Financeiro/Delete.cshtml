@@ -1,0 +1,64 @@
+﻿@model AdotaPet.WebApp.Models.Entities.Financeiro
+
+@{
+    ViewBag.Title = "Deletar financeiro";
+}
+
+<h2>Deletar movimentação financeira</h2>
+
+<h3>Você tem certeza que deseja apagar a movimentação financeira selecionada?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Entrada_saida)
+        </dt>
+
+        <dd>
+            @if (Model.Entrada_saida == 'E')
+            {
+                <p>Recebimento</p>
+            }
+            else
+            {
+                <p>Pagamento</p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_movimentacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_movimentacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Deletar" class="btn btn-danger" />
+
+        @Html.ActionLink("Listagem", "Index", "Index", new { @class = "btn btn-primary" })
+
+    </div>
+    }
+</div>
