@@ -23,7 +23,7 @@ namespace AdotaPet.WebApp.Controllers
             return View(db.Animal.ToList());
         }
 
-        // GET: Animal/Details/5
+            // GET: Animal/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
