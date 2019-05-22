@@ -1,0 +1,185 @@
+﻿@model AdotaPet.WebApp.Models.Entities.Animal
+
+@{
+    ViewBag.Title = "Cadastro de animal";
+}
+
+<h2>Cadastro de animal</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group col-md-6">
+        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label class="control-label col-md-2">Porte</label>
+        <div class="col-md-10">
+            <select class="custom-select form-control col-md-10" id="Porte">
+                <option selected value="1">Pequeno</option>
+                <option selected value="2">Médio</option>
+                <option selected value="3">Grande</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label class="control-label col-md-2">Vacinado</label>
+        <div class="col-md-10">
+            <select class="custom-select form-control col-md-10" id="vacinado">
+                <option selected value="1">Sim</option>
+                <option selected value="2">Nao</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label class="control-label col-md-2">Vermifugado</label>
+        <div class="col-md-10">
+            <select class="custom-select form-control col-md-10" id="vermifugado">
+                <option selected value="1">Sim</option>
+                <option selected value="2">Nao</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label class="control-label col-md-2">Sexo</label>
+        <div class="col-md-10">
+            <select class="custom-select form-control col-md-10" id="sexo">
+                <option selected value="M">Macho</option>
+                <option selected value="F">Fêmea</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label class="control-label col-md-2">Castrado</label>
+        <div class="col-md-10">
+            <select class="custom-select form-control col-md-10" id="castrado">
+                <option selected value="S">Sim</option>
+                <option selected value="N">Nao</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group col-md-6">
+        <label class="control-label col-md-2">Doença</label>
+        <div class="col-md-10">
+            <select class="custom-select form-control col-md-10" id="doenca_Id">
+                <option selected value="0">Selecione</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label class="control-label col-md-2">Raça</label>
+        <div class="col-md-10">
+            <select class="custom-select form-control col-md-10" id="raca_Id">
+                <option selected value="0">Selecione</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6 ">
+        <input type="hidden" id="Ong_Id" value="3" />
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" id="btnCadastrar">
+            <input type="button" value="Cadastrar" id="cadastrar" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<script>
+    window.onload = function () {
+        $("#btnCadastrar").css("margin-left", "9%");
+        popularDoencas();
+        popularRacas();
+        $("#cadastrar").click(function () {
+            salvar();
+        });
+        
+    }
+    function salvar() {
+        var animal = {
+            "nome": $("#Nome").val(),
+            "porte": $("#Porte").val(),
+            "vacinado": $("#vacinado").val(),
+            "vermifugado": $("#vermifugado").val(),
+            "sexo": $("#sexo").val(),
+            "doenca_Id": $("#doenca_Id").val(),
+            "raca_Id": $("#raca_Id").val(),
+            "castrado": $("#castrado").val(),
+            "Ong_Id": $("#Ong_Id").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "\Salvar",
+            data: JSON.stringify(animal),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (resposta) {
+                console.log(resposta);
+            },
+            error: function () {
+                alert("Não foi possivel listas as doenças, por favor entrar em contato com o suporte técnico");
+            }
+        });
+    }
+    function popularDoencas() {
+        $.ajax({
+            type: "POST",
+            url: "\ObterDoencas",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (resposta) {
+                popularComboDoenca(resposta);
+            },
+            error: function () {
+                alert("Não foi possivel listas as doenças, por favor entrar em contato com o suporte técnico");
+            }
+        });
+    }
+    function popularComboDoenca(doencas) {
+        var comboDoenca = $("#doenca_Id");
+        $.each(doencas, function (indice, doenca) { 
+            comboDoenca.append($("<option value=" + this.Id + ">").text((this.Codigo + ' - ' + this.Descricao)));           
+        });
+    }
+    function popularRacas() {
+        $.ajax({
+            type: "POST",
+            url: "\ObterRacas",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (resposta) {
+                popularComboRaca(resposta);
+            },
+            error: function () {
+                alert("Não foi possivel listas as doenças, por favor entrar em contato com o suporte técnico");
+            }
+        });
+    }
+    function popularComboRaca(racas) {
+        var comboRaca = $("#raca_Id");
+        $.each(racas, function (indice, raca) {
+            comboRaca.append($("<option value=" + this.Id + ">").text((this.Codigo + ' - ' + this.Descricao)));
+        });
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

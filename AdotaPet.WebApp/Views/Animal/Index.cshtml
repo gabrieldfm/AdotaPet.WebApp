@@ -1,0 +1,59 @@
+﻿@model IEnumerable<AdotaPet.WebApp.Models.Entities.Animal>
+
+@{
+    ViewBag.Title = "Listagem de animais";
+}
+
+<h2>Listagem de animais</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar animal", "Create","Create", new { @class = "btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sexo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Codigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td class="sexo">
+             @Html.DisplayFor(modelItem => item.Sexo)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Deletar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" }) 
+        </td>
+    </tr>
+}
+
+</table>
+<script>
+    window.onload = function () {
+        $.each($(".sexo"), function (indice, td) {
+            if (td.innerText == "F") {
+                td.innerText = "";
+                td.append("Femea");
+            } 
+            if (td.innerText == "M") {
+                td.innerText = "";
+                td.append("Macho");
+            } 
+        });
+
+    }
+    </script>

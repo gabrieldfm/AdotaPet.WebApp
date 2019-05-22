@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace AdotaPet.WebApp.Models.Entities
 {
@@ -7,7 +8,6 @@ namespace AdotaPet.WebApp.Models.Entities
         [Required]
         public int Id { get; set; }
 
-        [Required]
         public int Codigo { get; set; }
 
         [Required, StringLength(200)]
@@ -15,7 +15,7 @@ namespace AdotaPet.WebApp.Models.Entities
 
         [Required]
         public short Porte { get; set; }
-
+        
         [Required]
         public char Vacina { get; set; }
 
@@ -24,11 +24,11 @@ namespace AdotaPet.WebApp.Models.Entities
 
         [Required]
         public char Sexo { get; set; }
-
-        [Required]
+       
         public char Castrado { get; set; }
 
         [Required]
+        [JsonProperty(NullValueHandling = NullValueHandling.Include)]
         public Ong Ong_Id { get; set; }
 
         [Required]
