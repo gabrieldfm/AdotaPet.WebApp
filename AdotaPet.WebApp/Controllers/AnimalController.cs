@@ -139,7 +139,7 @@ namespace AdotaPet.WebApp.Controllers
          }
         public JsonResult ObterRacas()
         {
-            return Json(db.Raca.Where(d => d.Codigo > 0).ToList(), JsonRequestBehavior.AllowGet);
+           return Json(db.Raca.Where(d => d.Codigo > 0).ToList(), JsonRequestBehavior.AllowGet);
         }
         public JsonResult Salvar(String nome,String porte,String vacinado,String vermifugado,String sexo,String doenca_Id,String raca_Id,String castrado,string Ong_Id,string id)
         {
