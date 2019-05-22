@@ -304,7 +304,6 @@ namespace AdotaPet.WebApp.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Perfil")
-                        .IsRequired()
                         .HasMaxLength(15);
 
                     b.Property<string>("Senha")

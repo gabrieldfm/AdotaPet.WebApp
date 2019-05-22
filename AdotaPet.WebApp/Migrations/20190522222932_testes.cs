@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AdotaPet.WebApp.Migrations
 {
-    public partial class criacao : Migration
+    public partial class testes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,25 +31,14 @@ namespace AdotaPet.WebApp.Migrations
                     Numero = table.Column<int>(nullable: false),
                     Bairro = table.Column<string>(maxLength: 200, nullable: false),
                     Logradouro = table.Column<string>(maxLength: 200, nullable: false),
-                    Cep = table.Column<string>(maxLength: 30, nullable: false)
+                    Cep = table.Column<string>(maxLength: 30, nullable: false),
+                    Cidade = table.Column<string>(maxLength: 200, nullable: false),
+                    UF = table.Column<string>(maxLength: 2, nullable: false),
+                    Complemento = table.Column<string>(maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Endereco", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Raca",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Codigo = table.Column<int>(nullable: false),
-                    Descricao = table.Column<string>(maxLength: 200, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Raca", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,7 +50,7 @@ namespace AdotaPet.WebApp.Migrations
                     Nome = table.Column<string>(maxLength: 50, nullable: false),
                     Login = table.Column<string>(maxLength: 100, nullable: false),
                     Senha = table.Column<string>(maxLength: 200, nullable: false),
-                    Perfil = table.Column<string>(maxLength: 15, nullable: false),
+                    Perfil = table.Column<string>(maxLength: 15, nullable: true),
                     Ativo = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -100,41 +89,24 @@ namespace AdotaPet.WebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Animal",
+                name: "Financeiro",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Codigo = table.Column<int>(nullable: false),
-                    Nome = table.Column<string>(maxLength: 200, nullable: false),
-                    Porte = table.Column<short>(nullable: false),
-                    Vacina = table.Column<string>(nullable: false),
-                    Vermifugado = table.Column<string>(nullable: false),
-                    Sexo = table.Column<string>(nullable: false),
-                    Castrado = table.Column<string>(nullable: false),
-                    Ong_IdId = table.Column<int>(nullable: false),
-                    Doenca_IdId = table.Column<int>(nullable: false),
-                    Raca_IdId = table.Column<int>(nullable: false)
+                    Descricao = table.Column<string>(maxLength: 200, nullable: false),
+                    Data_movimentacao = table.Column<DateTime>(nullable: false),
+                    Entrada_saida = table.Column<string>(nullable: false),
+                    Valor = table.Column<decimal>(nullable: false),
+                    Ong_IdId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Animal", x => x.Id);
+                    table.PrimaryKey("PK_Financeiro", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Animal_Doenca_Doenca_IdId",
-                        column: x => x.Doenca_IdId,
-                        principalTable: "Doenca",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Animal_Ong_Ong_IdId",
+                        name: "FK_Financeiro_Ong_Ong_IdId",
                         column: x => x.Ong_IdId,
                         principalTable: "Ong",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Animal_Raca_Raca_IdId",
-                        column: x => x.Raca_IdId,
-                        principalTable: "Raca",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -161,13 +133,35 @@ namespace AdotaPet.WebApp.Migrations
                         column: x => x.Endereco_IdId,
                         principalTable: "Endereco",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Pessoa_Ong_Ong_IdId",
                         column: x => x.Ong_IdId,
                         principalTable: "Ong",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Raca",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Codigo = table.Column<int>(nullable: false),
+                    Descricao = table.Column<string>(maxLength: 200, nullable: false),
+                    Observacao = table.Column<string>(maxLength: 200, nullable: true),
+                    Ong_IdId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Raca", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Raca_Ong_Ong_IdId",
+                        column: x => x.Ong_IdId,
+                        principalTable: "Ong",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -200,6 +194,46 @@ namespace AdotaPet.WebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Animal",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Codigo = table.Column<int>(nullable: false),
+                    Nome = table.Column<string>(maxLength: 200, nullable: false),
+                    Porte = table.Column<short>(nullable: false),
+                    Vacina = table.Column<string>(nullable: false),
+                    Vermifugado = table.Column<string>(nullable: false),
+                    Sexo = table.Column<string>(nullable: false),
+                    Castrado = table.Column<string>(nullable: false),
+                    Ong_IdId = table.Column<int>(nullable: false),
+                    Doenca_IdId = table.Column<int>(nullable: false),
+                    Raca_IdId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Animal", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Animal_Doenca_Doenca_IdId",
+                        column: x => x.Doenca_IdId,
+                        principalTable: "Doenca",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Animal_Ong_Ong_IdId",
+                        column: x => x.Ong_IdId,
+                        principalTable: "Ong",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Animal_Raca_Raca_IdId",
+                        column: x => x.Raca_IdId,
+                        principalTable: "Raca",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Adocao_Itens",
                 columns: table => new
                 {
@@ -216,7 +250,7 @@ namespace AdotaPet.WebApp.Migrations
                         column: x => x.Adocao_IdId,
                         principalTable: "Adocao",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Adocao_Itens_Animal_Animal_IdId",
                         column: x => x.Animal_IdId,
@@ -261,6 +295,11 @@ namespace AdotaPet.WebApp.Migrations
                 column: "Raca_IdId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Financeiro_Ong_IdId",
+                table: "Financeiro",
+                column: "Ong_IdId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ong_Endereco_IdId",
                 table: "Ong",
                 column: "Endereco_IdId");
@@ -279,12 +318,20 @@ namespace AdotaPet.WebApp.Migrations
                 name: "IX_Pessoa_Ong_IdId",
                 table: "Pessoa",
                 column: "Ong_IdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Raca_Ong_IdId",
+                table: "Raca",
+                column: "Ong_IdId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Adocao_Itens");
+
+            migrationBuilder.DropTable(
+                name: "Financeiro");
 
             migrationBuilder.DropTable(
                 name: "Adocao");
