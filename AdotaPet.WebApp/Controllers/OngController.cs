@@ -18,7 +18,8 @@ namespace AdotaPet.WebApp.Controllers
         // GET: Ong
         public ActionResult Index()
         {
-            return View(db.Ong.Include(o => o.Usuario_Id).Include(o => o.Endereco_Id).ToList());
+            return View();
+            //return View(db.Ong.Include(o => o.Usuario_Id).Include(o => o.Endereco_Id).ToList());
         }
 
         // GET: Ong/Details/5

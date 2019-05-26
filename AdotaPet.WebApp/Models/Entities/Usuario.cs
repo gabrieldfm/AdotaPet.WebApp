@@ -4,7 +4,7 @@ namespace AdotaPet.WebApp.Models.Entities
 {
     public class Usuario
     {
-        [Required]
+        [Key]
         public int Id { get; set; }
 
         [Required, StringLength(50)]
@@ -20,6 +20,10 @@ namespace AdotaPet.WebApp.Models.Entities
         public string Perfil { get; set; }
 
         public char Ativo { get; set; }
+
+        [Required]
+        [Display(Name = "Ong:")]
+        public virtual Ong Ong { get; set; }
 
     }
 }

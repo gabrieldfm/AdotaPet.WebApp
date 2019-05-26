@@ -30,5 +30,47 @@ namespace AdotaPet.WebApp
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Db_AdotaPet;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 #endif
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Adocao>().Ignore(a => a.Ong_Id);
+            modelBuilder.Entity<Animal>().Ignore(a => a.Ong_Id);
+            modelBuilder.Entity<Financeiro>().Ignore(a => a.Ong_Id);
+            modelBuilder.Entity<Pessoa>().Ignore(a => a.Ong_Id);
+            modelBuilder.Entity<Raca>().Ignore(a => a.Ong_Id);
+
+            var ong = new Ong
+            {
+                Id = 1,
+                Codigo = 1,
+                Razao_Social = "AdminOng",
+                Nome_Fantasia = "AdminOng",
+                Cnpj = "01234567891234",
+                Numero = 1,
+                Bairro = "Centro",
+                Logradouro = "Centro",
+                Cep = "88802090",
+                Cidade = "Circiuma",
+                UF = "SC",
+                Complemento = string.Empty
+            };
+
+            modelBuilder.Entity<Ong>().HasData(ong);
+
+            //modelBuilder.Entity<Usuario>(u =>
+            //{
+            //    u.HasData(new
+            //    {
+            //        Id = 1,
+            //        Nome = "Administrador",
+            //        Login = "ADMINISTRADOR",
+            //        Senha = "1234",
+            //        Perfil = "ADMINISTRADOR",
+            //        Ativo = 'Y'
+            //    });
+
+            //    u.OwnsOne(e => e.Ong).HasData(ong);
+            //});
+        }
     }
 }
