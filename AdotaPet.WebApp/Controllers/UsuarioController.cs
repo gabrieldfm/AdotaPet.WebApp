@@ -1,6 +1,7 @@
 ﻿using AdotaPet.WebApp.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -22,19 +23,34 @@ namespace AdotaPet.WebApp.Controllers
         public ActionResult Login(string returnURL)
         {
             /*Recebe a url que o usuário tentou acessar*/
+            ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
             ViewBag.ReturnUrl = returnURL;
             return View(new Usuario());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string login, string senha, string returnUrl)
+        public ActionResult Login(string login, string senha, string ong, string returnUrl)
         {
             if (ModelState.IsValid)
             {
+                if(string.IsNullOrWhiteSpace(ong))
+                {
+                    ModelState.AddModelError("", "Selecione a Ong o qual deseja logar!!!");
+                    ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
+                    return View(new Usuario());
+                }
                 var vLogin = db.Usuario.Where(p => p.Login.Equals(login)).FirstOrDefault();
+
                 if (vLogin != null)
                 {
+                    var objOng = db.Ong.FirstOrDefault(o => o.Id == vLogin.OngId);
+                    if(objOng.Nome_Fantasia.ToUpper() != ong.ToUpper())
+                    {
+                        ModelState.AddModelError("", "Esse usuário não pertence a Ong selecionada!!!");
+                        ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
+                        return View(new Usuario());
+                    }
                     if (Equals(vLogin.Ativo, 'S'))
                     {
                         if (Equals(vLogin.Senha, senha))
@@ -48,25 +64,28 @@ namespace AdotaPet.WebApp.Controllers
                             {
                                 return Redirect(returnUrl);
                             }
-                            Session["Nome"] = vLogin.Nome;
                             Session["Login"] = vLogin.Login;
+                            Session["Ong"] = objOng.Nome_Fantasia;
                             return RedirectToAction("Index", "Home");
                         }
                         else
                         {
                             ModelState.AddModelError("", "Senha informada Inválida!!!");
+                            ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
                             return View(new Usuario());
                         }
                     }
                     else
                     {
                         ModelState.AddModelError("", "Usuário sem acesso para usar o sistema!!!");
+                        ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
                         return View(new Usuario());
                     }
                 }
                 else
                 {
                     ModelState.AddModelError("", "Login informado inválido!!!");
+                    ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
                     return View(new Usuario());
                 }
             }
@@ -76,12 +95,13 @@ namespace AdotaPet.WebApp.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.Ong = new SelectList(db.Ong, "Id", "Nome_Fantasia");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Login,Senha")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "Id,Nome,Login,Senha,OngId")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {

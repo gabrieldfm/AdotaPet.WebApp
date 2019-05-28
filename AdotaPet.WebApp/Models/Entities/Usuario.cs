@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdotaPet.WebApp.Models.Entities
 {
@@ -21,7 +22,9 @@ namespace AdotaPet.WebApp.Models.Entities
 
         public char Ativo { get; set; }
 
-        [Required]
+        public int OngId { get; set; }
+
+        [ForeignKey(nameof(OngId))]
         [Display(Name = "Ong:")]
         public virtual Ong Ong { get; set; }
 
