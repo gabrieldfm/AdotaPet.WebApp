@@ -573,8 +573,6 @@
     <Content Include="Views\Ong\Index.cshtml" />
     <Content Include="Views\Raca\Create.cshtml" />
     <Content Include="Views\Raca\Delete.cshtml" />
-    <Content Include="Views\Raca\Details.cshtml" />
-    <Content Include="Views\Raca\Edit.cshtml" />
     <Content Include="Views\Raca\Index.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Usuario\Delete.cshtml" />
