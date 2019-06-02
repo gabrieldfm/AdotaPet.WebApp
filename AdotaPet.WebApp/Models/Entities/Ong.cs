@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AdotaPet.WebApp.Models.Entities
@@ -41,6 +42,6 @@ namespace AdotaPet.WebApp.Models.Entities
 
         [StringLength(200)]
         public string Complemento { get; set; }
-        
+
     }
 }

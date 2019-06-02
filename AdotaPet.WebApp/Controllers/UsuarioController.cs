@@ -36,7 +36,7 @@ namespace AdotaPet.WebApp.Controllers
             {
                 if(string.IsNullOrWhiteSpace(ong))
                 {
-                    ModelState.AddModelError("", "Selecione a Ong o qual deseja logar!!!");
+                    ModelState.AddModelError("", "Selecione a Ong o qual deseja logar!");
                     ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
                     return View(new Usuario());
                 }
@@ -47,11 +47,11 @@ namespace AdotaPet.WebApp.Controllers
                     var objOng = db.Ong.FirstOrDefault(o => o.Id == vLogin.OngId);
                     if(objOng.Nome_Fantasia.ToUpper() != ong.ToUpper())
                     {
-                        ModelState.AddModelError("", "Esse usuário não pertence a Ong selecionada!!!");
+                        ModelState.AddModelError("", "Esse usuário não pertence a Ong selecionada!");
                         ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
                         return View(new Usuario());
                     }
-                    if (Equals(vLogin.Ativo, 'S'))
+                    if (Equals(vLogin.Ativo, 'Y'))
                     {
                         if (Equals(vLogin.Senha, senha))
                         {
@@ -70,21 +70,21 @@ namespace AdotaPet.WebApp.Controllers
                         }
                         else
                         {
-                            ModelState.AddModelError("", "Senha informada Inválida!!!");
+                            ModelState.AddModelError("", "Senha informada Inválida!");
                             ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
                             return View(new Usuario());
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Usuário sem acesso para usar o sistema!!!");
+                        ModelState.AddModelError("", "Usuário sem acesso para usar o sistema!");
                         ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
                         return View(new Usuario());
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Login informado inválido!!!");
+                    ModelState.AddModelError("", "Login informado inválido!");
                     ViewBag.Ong = db.Ong.Select(l => l.Nome_Fantasia).ToList();
                     return View(new Usuario());
                 }
@@ -105,6 +105,13 @@ namespace AdotaPet.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (db.Usuario.Any(l => l.Login == usuario.Login))
+                {
+                    ModelState.AddModelError("", "Este login já possui cadastro, informe um novo login!");
+                    ViewBag.Ong = new SelectList(db.Ong, "Id", "Nome_Fantasia");
+                    return View(usuario);
+                }
+
                 usuario.Perfil = "Usuario";
                 usuario.Ativo = 'S';
                 db.Usuario.Add(usuario);
