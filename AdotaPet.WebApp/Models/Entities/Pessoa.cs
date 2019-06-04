@@ -26,6 +26,24 @@ namespace AdotaPet.WebApp.Models.Entities
         public Ong Ong_Id { get; set; }
 
         [Required]
-        public Endereco Endereco_Id { get; set; }
+        public int Numero { get; set; }
+
+        [Required, StringLength(200)]
+        public string Bairro { get; set; }
+
+        [Required, StringLength(200)]
+        public string Logradouro { get; set; }
+
+        [Required, StringLength(30)]
+        public string Cep { get; set; }
+
+        [Required, StringLength(200)]
+        public string Cidade { get; set; }
+
+        [Required, StringLength(2)]
+        public string UF { get; set; }
+
+        [StringLength(200)]
+        public string Complemento { get; set; }
     }
 }

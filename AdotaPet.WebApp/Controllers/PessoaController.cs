@@ -15,6 +15,10 @@ namespace AdotaPet.WebApp.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
+        protected int ObterProximoCodigo()
+        {
+            return db.Raca.Count() > 0 ? new ApplicationContext().Raca.Where(x => x.Codigo > 0).Select(x => x.Codigo).Max() + 1 : 1;
+        }
         // GET: Pessoa
         public ActionResult Index()
         {
@@ -47,14 +51,15 @@ namespace AdotaPet.WebApp.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Codigo,Nome,Rg,Cpf,Telefone")] Pessoa pessoa)
+        public ActionResult Create([Bind(Include = "Id,Codigo,Nome,Rg,Cpf,Telefone,Numero,Bairro,Logradouro,Cep,Cidade,UF,Complemento,Ong_Id")] Pessoa pessoa)
         {
-            if (ModelState.IsValid)
-            {
+            
+                pessoa.Ong_Id = db.Ong.Find(1);
+                pessoa.Codigo = ObterProximoCodigo();
                 db.Pessoa.Add(pessoa);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            
 
             return View(pessoa);
         }
@@ -79,15 +84,14 @@ namespace AdotaPet.WebApp.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Codigo,Nome,Rg,Cpf,Telefone")] Pessoa pessoa)
+        public ActionResult Edit([Bind(Include = "Id,Codigo,Nome,Rg,Cpf,Telefone,Numero,Bairro,Logradouro,Cep,Cidade,UF,Complemento,Ong_Id")] Pessoa pessoa)
         {
-            if (ModelState.IsValid)
-            {
+            
+                pessoa.Ong_Id = db.Ong.Find(1);
                 db.Entry(pessoa).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            return View(pessoa);
+            
         }
 
         // GET: Pessoa/Delete/5

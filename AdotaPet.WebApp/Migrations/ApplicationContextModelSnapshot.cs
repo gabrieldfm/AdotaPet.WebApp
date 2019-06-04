@@ -230,17 +230,36 @@ namespace AdotaPet.WebApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
                     b.Property<int>("Codigo");
+
+                    b.Property<string>("Complemento")
+                        .HasMaxLength(200);
 
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(14);
 
-                    b.Property<int>("Endereco_IdId");
+                    b.Property<string>("Logradouro")
+                        .IsRequired()
+                        .HasMaxLength(200);
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(200);
+
+                    b.Property<int>("Numero");
 
                     b.Property<int>("Ong_IdId");
 
@@ -252,9 +271,11 @@ namespace AdotaPet.WebApp.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.HasKey("Id");
+                    b.Property<string>("UF")
+                        .IsRequired()
+                        .HasMaxLength(2);
 
-                    b.HasIndex("Endereco_IdId");
+                    b.HasKey("Id");
 
                     b.HasIndex("Ong_IdId");
 
@@ -382,11 +403,6 @@ namespace AdotaPet.WebApp.Migrations
 
             modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Pessoa", b =>
                 {
-                    b.HasOne("AdotaPet.WebApp.Models.Entities.Endereco", "Endereco_Id")
-                        .WithMany()
-                        .HasForeignKey("Endereco_IdId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("AdotaPet.WebApp.Models.Entities.Ong", "Ong_Id")
                         .WithMany()
                         .HasForeignKey("Ong_IdId")

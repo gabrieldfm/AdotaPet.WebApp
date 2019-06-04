@@ -230,8 +230,11 @@
     <Compile Include="Migrations\20190522222932_testes.designer.cs">
       <DependentUpon>20190522222932_testes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190524001437_correcaoDoEnderecoNapessoa.cs" />
+    <Compile Include="Migrations\20190524001437_correcaoDoEnderecoNapessoa.designer.cs">
+      <DependentUpon>20190524001437_correcaoDoEnderecoNapessoa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
-    <Compile Include="Models\AdotaPetWebAppContext.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />
     <Compile Include="Models\Entities\Adocao_Itens.cs" />
     <Compile Include="Models\Entities\Animal.cs" />
