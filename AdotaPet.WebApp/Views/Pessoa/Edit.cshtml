@@ -5,7 +5,9 @@
 }
 
 <h2>Editar pessoa</h2>
-
+<div>
+    
+</div>
 
 @using (Html.BeginForm())
 {
@@ -120,14 +122,13 @@
         <div class="form-group">
             <div class="col-md-10" style="margin-left:100px">
                 <input type="submit" value="Salvar" class="btn btn-success" />
+                @Html.ActionLink("Listagem", "Index", "Index", new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
     }
 
-    <div>
-        @Html.ActionLink("Voltar", "Index")
-    </div>
+    
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

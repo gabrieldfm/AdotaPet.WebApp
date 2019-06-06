@@ -46,8 +46,8 @@
         @Html.AntiForgeryToken()
 
     <div class="form-actions no-color">
-        <input type="submit" value="Deletar" class="btn btn-danger" /> |
-        @Html.ActionLink("Voltar", "Index")
+        <input type="submit" value="Deletar" class="btn btn-danger" />
+        @Html.ActionLink("Listagem", "Index", "Index", new { @class = "btn btn-primary" })
     </div>
     }
 </div>

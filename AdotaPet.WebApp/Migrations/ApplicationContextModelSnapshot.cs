@@ -164,6 +164,30 @@ namespace AdotaPet.WebApp.Migrations
                     b.ToTable("Endereco");
                 });
 
+            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Evento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Codigo");
+
+                    b.Property<int>("Data");
+
+                    b.Property<DateTime>("Data_evento");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired();
+
+                    b.Property<int>("Ong_IdId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Ong_IdId");
+
+                    b.ToTable("Evento");
+                });
+
             modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Financeiro", b =>
                 {
                     b.Property<int>("Id")
@@ -377,6 +401,14 @@ namespace AdotaPet.WebApp.Migrations
                     b.HasOne("AdotaPet.WebApp.Models.Entities.Raca", "Raca_Id")
                         .WithMany()
                         .HasForeignKey("Raca_IdId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Evento", b =>
+                {
+                    b.HasOne("AdotaPet.WebApp.Models.Entities.Ong", "Ong_Id")
+                        .WithMany()
+                        .HasForeignKey("Ong_IdId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -17,7 +17,7 @@ namespace AdotaPet.WebApp.Controllers
 
         protected int ObterProximoCodigo()
         {
-            return db.Raca.Count() > 0 ? new ApplicationContext().Raca.Where(x => x.Codigo > 0).Select(x => x.Codigo).Max() + 1 : 1;
+            return db.Pessoa.Count() > 0 ? new ApplicationContext().Pessoa.Where(x => x.Codigo > 0).Select(x => x.Codigo).Max() + 1 : 1;
         }
         // GET: Pessoa
         public ActionResult Index()

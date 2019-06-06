@@ -217,6 +217,7 @@
     </Compile>
     <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\AnimalController.cs" />
+    <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OngController.cs" />
@@ -234,12 +235,21 @@
     <Compile Include="Migrations\20190524001437_correcaoDoEnderecoNapessoa.designer.cs">
       <DependentUpon>20190524001437_correcaoDoEnderecoNapessoa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190604015236_criacaoEvento.cs" />
+    <Compile Include="Migrations\20190604015236_criacaoEvento.designer.cs">
+      <DependentUpon>20190604015236_criacaoEvento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190604023108_testeDataEvento.cs" />
+    <Compile Include="Migrations\20190604023108_testeDataEvento.designer.cs">
+      <DependentUpon>20190604023108_testeDataEvento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />
     <Compile Include="Models\Entities\Adocao_Itens.cs" />
     <Compile Include="Models\Entities\Animal.cs" />
     <Compile Include="Models\Entities\Doenca.cs" />
     <Compile Include="Models\Entities\Endereco.cs" />
+    <Compile Include="Models\Entities\Evento.cs" />
     <Compile Include="Models\Entities\Financeiro.cs" />
     <Compile Include="Models\Entities\Ong.cs" />
     <Compile Include="Models\Entities\Pessoa.cs" />
@@ -573,6 +583,11 @@
     <Content Include="Views\Pessoa\Details.cshtml" />
     <Content Include="Views\Pessoa\Edit.cshtml" />
     <Content Include="Views\Pessoa\Index.cshtml" />
+    <Content Include="Views\Evento\Create.cshtml" />
+    <Content Include="Views\Evento\Delete.cshtml" />
+    <Content Include="Views\Evento\Details.cshtml" />
+    <Content Include="Views\Evento\Edit.cshtml" />
+    <Content Include="Views\Evento\Index.cshtml" />
     <None Include="web.Debug_E.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
