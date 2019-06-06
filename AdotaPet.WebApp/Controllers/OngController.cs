@@ -15,10 +15,10 @@ namespace AdotaPet.WebApp.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
-        // GET: Ong
+        [Authorize(Roles = "ADMINISTRADOR")]
         public ActionResult Index()
         {
-            return View(db.Ong.Include(o => o.Usuario_Id).Include(o => o.Endereco_Id).ToList());
+            return View(db.Ong.ToList());
         }
 
         // GET: Ong/Details/5
@@ -36,20 +36,16 @@ namespace AdotaPet.WebApp.Controllers
             return View(ong);
         }
 
-        // GET: Ong/Create
+        [Authorize(Roles = "ADMINISTRADOR")]
         public ActionResult Create()
         {
-            ViewBag.Usuario = db.Usuario.Select(l => l.Login).ToList();
-            ViewBag.Endereco = db.Endereco.Select(l => l.Logradouro).ToList();
-            //ViewData["Usuario_Id"] = new SelectList(db.Usuario.ToList(), "Id", "Initials");
-            //ViewData["Endereco_Id"] = new SelectList(db.Endereco.ToList(), "Id", "Initials");
             return View();
         }
 
         // POST: Ong/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Codigo,Razao_Social,Nome_Fantasia,Cnpj")] Ong ong)
+        public ActionResult Create(Ong ong)
         {
             if (ModelState.IsValid)
             {

@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AdotaPet.WebApp.Models.Entities
 {
     public class Ong
     {
-        [Required]
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -22,12 +23,25 @@ namespace AdotaPet.WebApp.Models.Entities
         public string Cnpj { get; set; }
 
         [Required]
-        [Display(Name = "Usuário:")]
-        public virtual Usuario Usuario_Id { get; set; }
+        public int Numero { get; set; }
 
-        [Required]
-        [Display(Name = "Endereço:")]
-        public virtual Endereco Endereco_Id { get; set; }
-        
+        [Required, StringLength(200)]
+        public string Bairro { get; set; }
+
+        [Required, StringLength(200)]
+        public string Logradouro { get; set; }
+
+        [Required, StringLength(30)]
+        public string Cep { get; set; }
+
+        [Required, StringLength(200)]
+        public string Cidade { get; set; }
+
+        [Required, StringLength(2)]
+        public string UF { get; set; }
+
+        [StringLength(200)]
+        public string Complemento { get; set; }
+
     }
 }
