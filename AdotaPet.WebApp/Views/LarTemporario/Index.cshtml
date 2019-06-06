@@ -1,13 +1,13 @@
-﻿@model IEnumerable<AdotaPet.WebApp.Models.Entities.Raca>
+﻿@model IEnumerable<AdotaPet.WebApp.Models.Entities.LarTemporario>
 
 @{
-    ViewBag.Title = "Listagem de raça";
+    ViewBag.Title = "Listagem de lar temporário";
 }
 
-<h2>Listagem de raça</h2>
+<h2>Listagem de lar temporário</h2>
 
 <p>
-    @Html.ActionLink("Cadastrar raça", "Create", "Create", new { @class = "btn btn-primary" })    
+    @Html.ActionLink("Cadastrar lar temporário", "Create", "Create", new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -15,10 +15,7 @@
             @Html.DisplayNameFor(model => model.Codigo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Observacao)
+            @Html.DisplayNameFor(model => model.Cidade)
         </th>
         <th></th>
     </tr>
@@ -28,11 +25,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Codigo)
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Observacao)
+            @Html.DisplayFor(modelItem => item.Cidade)
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })

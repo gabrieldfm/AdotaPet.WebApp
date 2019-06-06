@@ -17,6 +17,8 @@ namespace AdotaPet.WebApp
         public DbSet<Ong> Ong { get; set; }
         public DbSet<Adocao_Itens> Adocao_Itens { get; set; }
         public DbSet<Financeiro> Financeiro { get; set; }
+        public DbSet<LarTemporario> LarTemporario { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

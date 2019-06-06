@@ -56,18 +56,8 @@
         <th>
             @Html.DisplayNameFor(model => model.Entrada_saida)
         </th>
-
     </tr>
 </table>
-
-<div class="col-md-3">
-
-    <br /> <br /> <br />
-    <label>Saldo total disponível</label>
-    <input id="Saldo_total" name="txtTotal" type="text" class="form-control" disabled="disabled">
-    <br />
-
-</div>
 
 @section Scripts {
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -106,7 +96,14 @@
                             tr.append($("<td>").text((this.Entrada_saida == "E" ? "Recebimento" : "Pagamento")));
                             tabela.append(tr);
                         });
+                        var tr = $("<tr>").addClass("remove");
+                        var input = $("<input>").addClass("form-control").attr("disabled", "disabled").val(resposta.total);
+                        tr.append($("<td>").html(("<b>Saldo total disponível </b>")));
+                        tr.append($("<td>").text(("")));
+                        tr.append($("<td>").text(("")));
+                        tr.append($("<td>").append(input));
                         $("#Saldo_total").val(resposta.total);
+                        tabela.append(tr);
                     },
                     error: function (obj) {
                         alert("Erro inesperado entre em contato com o suporte tecnico.");

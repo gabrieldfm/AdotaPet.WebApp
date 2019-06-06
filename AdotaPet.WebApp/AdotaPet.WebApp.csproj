@@ -219,15 +219,12 @@
     <Compile Include="Controllers\AnimalController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LarTemporarioController.cs" />
     <Compile Include="Controllers\OngController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190522222932_testes.cs" />
-    <Compile Include="Migrations\20190522222932_testes.designer.cs">
-      <DependentUpon>20190522222932_testes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />
@@ -236,6 +233,7 @@
     <Compile Include="Models\Entities\Doenca.cs" />
     <Compile Include="Models\Entities\Endereco.cs" />
     <Compile Include="Models\Entities\Financeiro.cs" />
+    <Compile Include="Models\Entities\LarTemporario.cs" />
     <Compile Include="Models\Entities\Ong.cs" />
     <Compile Include="Models\Entities\Pessoa.cs" />
     <Compile Include="Models\Entities\Raca.cs" />
@@ -417,12 +415,16 @@
     <Content Include="Views\Raca\Delete.cshtml" />
     <Content Include="Views\Raca\Details.cshtml" />
     <Content Include="Views\Raca\Edit.cshtml" />
-    <Content Include="Views\Raca\Index.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Usuario\Delete.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
+    <Content Include="Views\LarTemporario\Create.cshtml" />
+    <Content Include="Views\LarTemporario\Delete.cshtml" />
+    <Content Include="Views\LarTemporario\Details.cshtml" />
+    <Content Include="Views\LarTemporario\Edit.cshtml" />
+    <Content Include="Views\LarTemporario\Index.cshtml" />
     <None Include="web.Debug_E.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -431,6 +433,7 @@
     <Content Include="Views\Ong\Details.cshtml" />
     <Content Include="Views\Ong\Edit.cshtml" />
     <Content Include="Views\Ong\Index.cshtml" />
+    <Content Include="Views\Raca\Edit.cshtml" />
     <Content Include="Views\Raca\Create.cshtml" />
     <Content Include="Views\Raca\Delete.cshtml" />
     <Content Include="Views\Raca\Index.cshtml" />
