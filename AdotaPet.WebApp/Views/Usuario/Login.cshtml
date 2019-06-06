@@ -6,7 +6,7 @@
 
 <h2>Index</h2>
 
-@using (Html.BeginForm("Login", "Usuario", new { login = Model.Login, senha = Model.Senha, ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,
+@using (Html.BeginForm("Login", "Usuario", new { login = Model.Login, senha = Model.Senha, ong = Model.Ong, ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,
 new { @class = "form-horizontal" }))
 {
 @Html.AntiForgeryToken();
@@ -22,6 +22,10 @@ new { @class = "form-horizontal" }))
 
             <div style="padding-top:30px" class="panel-body">
                 <div style="display:none" id="result" class="alert alert-danger col-sm-12"></div>
+
+                <div style="margin-bottom: 25px" class="input-group">
+                    @Html.DropDownListFor(model => model.Ong, new SelectList(ViewBag.Ong), "ONG", new { @class = "form-control" })
+                </div>
 
                 <div style="margin-bottom: 25px" class="input-group">
                     <span class="input-group-addon">

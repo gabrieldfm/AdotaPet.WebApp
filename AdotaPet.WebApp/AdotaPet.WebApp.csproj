@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.EntityFrameworkCore.Design.2.2.4\build\net461\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('..\packages\Microsoft.EntityFrameworkCore.Design.2.2.4\build\net461\Microsoft.EntityFrameworkCore.Design.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -220,6 +220,7 @@
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LarTemporarioController.cs" />
     <Compile Include="Controllers\OngController.cs" />
     <Compile Include="Controllers\PessoaController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
@@ -251,12 +252,12 @@
     <Compile Include="Models\Entities\Endereco.cs" />
     <Compile Include="Models\Entities\Evento.cs" />
     <Compile Include="Models\Entities\Financeiro.cs" />
+    <Compile Include="Models\Entities\LarTemporario.cs" />
     <Compile Include="Models\Entities\Ong.cs" />
     <Compile Include="Models\Entities\Pessoa.cs" />
     <Compile Include="Models\Entities\Raca.cs" />
     <Compile Include="Models\Entities\Usuario.cs" />
     <Compile Include="Models\Roles.cs" />
-    <Compile Include="Models\ViewModels\OngViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -264,145 +265,6 @@
     <Content Include="App_Data\AdotaPetWebAppContext-20190501145355_log.ldf">
       <DependentUpon>AdotaPetWebAppContext-20190501145355.mdf</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.atualizaPagamentoNaEntregaResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.atualizaRemessaAgrupadaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.bloquearObjetoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaClienteResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaContratoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaDataAtualResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaPagamentoEntregaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaServicosAdicionaisAtivosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaServicosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaServicosValorDeclaradoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaServicosXServicosAdicionaisResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaTarifaValeResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.calculaTarifaServicoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.cancelarObjetoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.cancelarPedidoScolResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.clienteERP.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.consultaCEPResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.consultaSROResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.consultaSRO_NEWResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.contratoERP.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.embalagemLRSMaster.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.enderecoERP.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.fechaPlpResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.fechaPlpVariosServicosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.geraDigitoVerificadorEtiquetasResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.getStatusCartaoPostagemResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.getStatusPLPResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.integrarUsuarioScolResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.obterClienteAtualizacaoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.obterEmbalagemLRSResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.retornoCancelamento.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.servicoAdicionalXML.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.servicoERP.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.solicitaEtiquetasResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.solicitaPLPResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.solicitarPostagemScolResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.solicitaXmlPlpResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.statusCartao.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.statusPlp.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.valePostal.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.validaEtiquetaPLPResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.validaPlpResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.validarPostagemReversaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.validarPostagemSimultaneaResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.verificaDisponibilidadeServicoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.VerificaSeTodosObjetosCanceladosResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\CorreioAPI\configuration91.svcinfo" />
-    <None Include="Connected Services\CorreioAPI\configuration.svcinfo" />
-    <None Include="Connected Services\CorreioAPI\Reference.svcmap" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -572,7 +434,6 @@
     <Content Include="Views\Raca\Delete.cshtml" />
     <Content Include="Views\Raca\Details.cshtml" />
     <Content Include="Views\Raca\Edit.cshtml" />
-    <Content Include="Views\Raca\Index.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Usuario\Delete.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
@@ -588,6 +449,11 @@
     <Content Include="Views\Evento\Details.cshtml" />
     <Content Include="Views\Evento\Edit.cshtml" />
     <Content Include="Views\Evento\Index.cshtml" />
+    <Content Include="Views\LarTemporario\Create.cshtml" />
+    <Content Include="Views\LarTemporario\Delete.cshtml" />
+    <Content Include="Views\LarTemporario\Details.cshtml" />
+    <Content Include="Views\LarTemporario\Edit.cshtml" />
+    <Content Include="Views\LarTemporario\Index.cshtml" />
     <None Include="web.Debug_E.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -596,10 +462,9 @@
     <Content Include="Views\Ong\Details.cshtml" />
     <Content Include="Views\Ong\Edit.cshtml" />
     <Content Include="Views\Ong\Index.cshtml" />
+    <Content Include="Views\Raca\Edit.cshtml" />
     <Content Include="Views\Raca\Create.cshtml" />
     <Content Include="Views\Raca\Delete.cshtml" />
-    <Content Include="Views\Raca\Details.cshtml" />
-    <Content Include="Views\Raca\Edit.cshtml" />
     <Content Include="Views\Raca\Index.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Usuario\Delete.cshtml" />

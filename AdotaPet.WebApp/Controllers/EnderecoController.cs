@@ -67,7 +67,7 @@ namespace AdotaPet.WebApp.Controllers
         {
             try
             {
-                using (var ws = new CorreioAPI.AtendeClienteClient())
+                using (var ws = new BuscaEndereco.AtendeClienteClient())
                 {
                     var resultado = ws.consultaCEP(cep);
                     var obj = new

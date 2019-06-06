@@ -1,0 +1,289 @@
+﻿@model AdotaPet.WebApp.Models.Entities.LarTemporario
+
+@{
+    ViewBag.Title = "Cadastro de lar temporário";
+}
+
+<h2>Cadastro de lar temporário</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-2">Responsável</label>
+            <div class="col-md-10">
+                <select class="custom-select form-control col-md-10" id="pessoa_Id">
+                    <option selected value="0">Selecione</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Cep, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cep, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Logradouro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Logradouro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Logradouro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Complemento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.UF, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UF, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UF, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-2">ONG</label>
+            <div class="col-md-10">
+                <select class="custom-select form-control col-md-10" id="ong_Id">
+                    <option selected value="0">Selecione</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-2">Animal</label>
+            <div class="col-md-10">
+                <select class="custom-select form-control col-md-10" id="animal_Id">
+                    <option selected value="0">Selecione</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Observacao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Observacao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Cadastrar" id="cadastrar" class="btn btn-success" />
+                @Html.ActionLink("Listagem", "Index", "Index", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            popularAnimal();
+            popularOng();
+            popularPessoa();
+
+            $("#cadastrar").click(function () {
+                salvar();
+            });
+
+            $("#Cep").focusout(function () {
+                sugerirEndereco();
+            });
+        }
+
+        function salvar() {
+            var lar_temporario = {
+                "Ong_Id": $("#ong_Id").val(),
+                "Numero": $("#Numero").val(),
+                "Pessoa_Id": $("#pessoa_Id").val(),
+                "Animal_Id": $("#animal_Id").val(),
+                "Observacao": $("#Observacao").val(),
+                "Bairro": $("#Bairro").val(),
+                "Cep": $("#Cep").val(),
+                "Cidade": $("#Cidade").val(),
+                "Complemento": $("#Complemento").val(),
+                "Logradouro": $("#Logradouro").val(),
+                "UF": $("#UF").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: "\Salvar",
+                data: JSON.stringify(lar_temporario),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resposta) {
+                    $("#Numero").val("");
+                    $("#pessoa_Id").val("");
+                    $("#animal_Id").val("");
+                    $("#Observacao").val("");
+                    $("#Bairro").val("");
+                    $("#Cep").val("");
+                    $("#Cidade").val("");
+                    $("#Complemento").val("");
+                    $("#Logradouro").val("");
+                    $("#UF").val("");
+                    alert("Registro salvo com sucesso!");
+                },
+                error: function () {
+                    alert("Não foi possivel salvar o cadastro, por favor entrar em contato com o suporte técnico");
+                }
+            });
+        }
+
+        function sugerirEndereco() {
+            $("input:text,form").attr("autocomplete", "off");
+            var cep = $("#Cep").val();
+            $.ajax({
+                type: "POST",
+                url: "\ObterCep",
+                data: "{Cep:'" + $("#Cep").val() + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resposta) {
+                    console.log(resposta);
+                    if (resposta.codigo == 500) {
+                        alert(resposta.mensagem);
+                        return false;
+                    }
+
+                    if ($("#UF").val() != "") {
+                        $("#UF").val();
+                    } else {
+                        $("#UF").val(resposta.uf);
+                    }
+
+                    if ($("#Bairro").val() != "") {
+                        $("#Bairro").val();
+                    } else {
+                        $("#Bairro").val(resposta.bairro);
+                    }
+
+                    if ($("#Logradouro").val() != "") {
+                        $("#Logradouro").val();
+                    } else {
+                        $("#Logradouro").val(resposta.endereco);
+                    }
+
+                    if ($("#Cidade").val() != "") {
+                        $("#Cidade").val();
+                    } else {
+                        $("#Cidade").val(resposta.cidade);
+                    }
+
+                    if ($("#Complemento").val() != "") {
+                        $("#Complemento").val();
+                    } else {
+                        $("#Complemento").val(resposta.complemento2);
+                    }
+
+                },
+                error: function (obj) {
+                    alert("Erro inesperado entre em contato com o suporte tecnico.");
+
+                }
+            });
+        }
+
+        function popularAnimal() {
+            $.ajax({
+                type: "POST",
+                url: "\ObterAnimais",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resposta) {
+                    popularComboAnimal(resposta);
+                },
+                error: function () {
+                    alert("Não foi possivel listar os animais, por favor entrar em contato com o suporte técnico");
+                }
+            });
+        }
+        function popularComboAnimal(animais) {
+            var comboAnimal = $("#animal_Id");
+            $.each(animais, function (indice, animal) {
+                comboAnimal.append($("<option value=" + this.Id + ">").text((this.Codigo + ' - ' + this.Nome)));
+            });
+        }
+
+        function popularOng() {
+            $.ajax({
+                type: "POST",
+                url: "\ObterOngs",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resposta) {
+                    popularComboOng(resposta);
+                },
+                error: function () {
+                    alert("Não foi possivel listar as ONGs, por favor entrar em contato com o suporte técnico");
+                }
+            });
+        }
+        function popularComboOng(Ongs) {
+            var comboOng = $("#ong_Id");
+            $.each(Ongs, function (indice, ong) {
+                comboOng.append($("<option value=" + this.Id + ">").text((this.Codigo + ' - ' + this.Nome_Fantasia)));
+            });
+        }
+
+        function popularPessoa() {
+            $.ajax({
+                type: "POST",
+                url: "\ObterPessoas",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resposta) {
+                    popularComboPessoa(resposta);
+                },
+                error: function () {
+                    alert("Não foi possivel listar os responsáveis, por favor entrar em contato com o suporte técnico");
+                }
+            });
+        }
+        function popularComboPessoa(Pessoas) {
+            var comboPessoa = $("#pessoa_Id");
+            $.each(Pessoas, function (indice, pessoa) {
+                comboPessoa.append($("<option value=" + this.Id + ">").text((this.Codigo + ' - ' + this.Nome)));
+            });
+        }
+
+    </script>
+}
+

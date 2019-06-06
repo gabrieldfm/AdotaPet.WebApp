@@ -1,28 +1,32 @@
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.ComponentModel.DataAnnotations;
 
 namespace AdotaPet.WebApp.Models.Entities
 {
-    public class Ong
+    public class LarTemporario
     {
-        [Key]
+        [Required]
         public int Id { get; set; }
 
-        [Required]
+        [Required][Display(Name = "Código")]
         public int Codigo { get; set; }
 
-        [Required, StringLength(200)]
-        [Display(Name = "Raz�o social:")]
-        public string Razao_Social { get; set; }
-
-        [Required, StringLength(200)]
-        [Display(Name = "Nome fantasia:")]
-        public string Nome_Fantasia { get; set; }
-
-        [Required, StringLength(18)]
-        public string Cnpj { get; set; }
+        [Required]
+        public Ong Ong_Id { get; set; }
 
         [Required]
+        public Pessoa Pessoa_Id { get; set; }
+
+        [Required]
+        public Animal Animal_Id { get; set; }
+
+        [StringLength(200)][Display(Name = "Observação")]
+        public string Observacao { get; set; }
+
+        [Required][Display(Name = "Número")]
         public int Numero { get; set; }
 
         [Required, StringLength(200)]
@@ -31,7 +35,7 @@ namespace AdotaPet.WebApp.Models.Entities
         [Required, StringLength(200)]
         public string Logradouro { get; set; }
 
-        [Required, StringLength(30)]
+        [Required, StringLength(30)][Display(Name = "CEP")]
         public string Cep { get; set; }
 
         [Required, StringLength(200)]
@@ -40,8 +44,7 @@ namespace AdotaPet.WebApp.Models.Entities
         [Required, StringLength(2)]
         public string UF { get; set; }
 
-        [StringLength(200)]
+        [StringLength(200)][Display(Name = "Comp.")]
         public string Complemento { get; set; }
-
     }
 }

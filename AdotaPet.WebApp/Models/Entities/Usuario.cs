@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdotaPet.WebApp.Models.Entities
 {
     public class Usuario
     {
-        [Required]
+        [Key]
         public int Id { get; set; }
 
         [Required, StringLength(50)]
@@ -20,6 +21,12 @@ namespace AdotaPet.WebApp.Models.Entities
         public string Perfil { get; set; }
 
         public char Ativo { get; set; }
+
+        public int OngId { get; set; }
+
+        [ForeignKey(nameof(OngId))]
+        [Display(Name = "Ong:")]
+        public virtual Ong Ong { get; set; }
 
     }
 }
