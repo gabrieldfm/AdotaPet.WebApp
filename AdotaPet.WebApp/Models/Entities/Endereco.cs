@@ -25,7 +25,7 @@ namespace AdotaPet.WebApp.Models.Entities
         [Required, StringLength(2)]
         public string UF { get; set; }
 
-        [Required, StringLength(200)]
+        [StringLength(200)]
         public string Complemento { get; set; }
 
 
