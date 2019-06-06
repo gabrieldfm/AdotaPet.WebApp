@@ -226,22 +226,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20190522222932_testes.cs" />
-    <Compile Include="Migrations\20190522222932_testes.designer.cs">
-      <DependentUpon>20190522222932_testes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190523231529_criandoLarTemporario.cs" />
-    <Compile Include="Migrations\20190523231529_criandoLarTemporario.designer.cs">
-      <DependentUpon>20190523231529_criandoLarTemporario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190524001539_criandoLar.cs" />
-    <Compile Include="Migrations\20190524001539_criandoLar.designer.cs">
-      <DependentUpon>20190524001539_criandoLar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190530205131_lar.cs" />
-    <Compile Include="Migrations\20190530205131_lar.designer.cs">
-      <DependentUpon>20190530205131_lar.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />
     <Compile Include="Models\Entities\Adocao_Itens.cs" />
