@@ -65,7 +65,7 @@ namespace AdotaPet.WebApp.Controllers
                                 return Redirect(returnUrl);
                             }
                             Session["Login"] = vLogin.Login;
-                            Session["Ong"] = objOng.Nome_Fantasia;
+                            Session["Ong"] = objOng.Id;
                             return RedirectToAction("Index", "Home");
                         }
                         else

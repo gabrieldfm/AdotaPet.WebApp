@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.EntityFrameworkCore.Design.2.2.4\build\net461\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('..\packages\Microsoft.EntityFrameworkCore.Design.2.2.4\build\net461\Microsoft.EntityFrameworkCore.Design.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -210,7 +210,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MoneyMaskBundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Connected Services\CorreioAPI\Reference.cs">
+    <Compile Include="Connected Services\BuscaEndereco\Reference.cs" />
+    <Compile Include="Connected Services\BuscaEndereco\Reference1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -218,6 +219,7 @@
     <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\AnimalController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
+    <Compile Include="Controllers\GerenciamentoDenunciaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LarTemporarioController.cs" />
     <Compile Include="Controllers\OngController.cs" />
@@ -226,6 +228,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190607001508_denuncia.cs" />
+    <Compile Include="Migrations\20190607001508_denuncia.designer.cs">
+      <DependentUpon>20190607001508_denuncia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />
     <Compile Include="Models\Entities\Adocao_Itens.cs" />
@@ -233,6 +239,7 @@
     <Compile Include="Models\Entities\Doenca.cs" />
     <Compile Include="Models\Entities\Endereco.cs" />
     <Compile Include="Models\Entities\Financeiro.cs" />
+    <Compile Include="Models\Entities\GerenciamentoDenuncia.cs" />
     <Compile Include="Models\Entities\LarTemporario.cs" />
     <Compile Include="Models\Entities\Ong.cs" />
     <Compile Include="Models\Entities\Pessoa.cs" />
@@ -246,6 +253,12 @@
     <Content Include="App_Data\AdotaPetWebAppContext-20190501145355_log.ldf">
       <DependentUpon>AdotaPetWebAppContext-20190501145355.mdf</DependentUpon>
     </Content>
+    <None Include="Connected Services\BuscaEndereco\configuration.svcinfo" />
+    <None Include="Connected Services\BuscaEndereco\configuration91.svcinfo" />
+    <None Include="Connected Services\BuscaEndereco\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference1.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -297,53 +310,53 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.atualizaPagamentoNaEntregaResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.atualizaRemessaAgrupadaResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.bloquearObjetoResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaClienteResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaContratoResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaDataAtualResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaPagamentoEntregaResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaServicosAdicionaisAtivosResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaServicosResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaServicosValorDeclaradoResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaServicosXServicosAdicionaisResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.buscaTarifaValeResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.calculaTarifaServicoResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.cancelarObjetoResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.cancelarPedidoScolResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.clienteERP.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.consultaCEPResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.consultaSROResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.consultaSRO_NEWResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.contratoERP.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.embalagemLRSMaster.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.enderecoERP.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.fechaPlpResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.fechaPlpVariosServicosResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.geraDigitoVerificadorEtiquetasResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.getStatusCartaoPostagemResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.getStatusPLPResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.integrarUsuarioScolResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.obterClienteAtualizacaoResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.obterEmbalagemLRSResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.retornoCancelamento.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.servicoAdicionalXML.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.servicoERP.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.solicitaEtiquetasResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.solicitaPLPResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.solicitarPostagemScolResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.solicitaXmlPlpResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.statusCartao.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.statusPlp.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.valePostal.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.validaEtiquetaPLPResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.validaPlpResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.validarPostagemReversaResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.validarPostagemSimultaneaResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.verificaDisponibilidadeServicoResponse.datasource" />
-    <Content Include="Connected Services\CorreioAPI\AdotaPet.WebApp.CorreioAPI.VerificaSeTodosObjetosCanceladosResponse.datasource" />
-    <None Include="Connected Services\CorreioAPI\AtendeClienteService.wsdl" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.atualizaPagamentoNaEntregaResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.atualizaRemessaAgrupadaResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.bloquearObjetoResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.buscaClienteResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.buscaContratoResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.buscaDataAtualResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.buscaPagamentoEntregaResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.buscaServicosAdicionaisAtivosResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.buscaServicosResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.buscaServicosValorDeclaradoResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.buscaServicosXServicosAdicionaisResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.buscaTarifaValeResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.calculaTarifaServicoResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.cancelarObjetoResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.cancelarPedidoScolResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.clienteERP.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.consultaCEPResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.consultaSROResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.consultaSRO_NEWResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.contratoERP.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.embalagemLRSMaster.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.enderecoERP.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.fechaPlpResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.fechaPlpVariosServicosResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.geraDigitoVerificadorEtiquetasResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.getStatusCartaoPostagemResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.getStatusPLPResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.integrarUsuarioScolResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.obterClienteAtualizacaoResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.obterEmbalagemLRSResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.retornoCancelamento.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.servicoAdicionalXML.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.servicoERP.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.solicitaEtiquetasResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.solicitaPLPResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.solicitarPostagemScolResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.solicitaXmlPlpResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.statusCartao.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.statusPlp.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.valePostal.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.validaEtiquetaPLPResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.validaPlpResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.validarPostagemReversaResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.validarPostagemSimultaneaResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.verificaDisponibilidadeServicoResponse.datasource" />
+    <Content Include="Connected Services\BuscaEndereco\AdotaPet.WebApp.BuscaEndereco.VerificaSeTodosObjetosCanceladosResponse.datasource" />
+    <None Include="Connected Services\BuscaEndereco\AtendeClienteService.wsdl" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
     <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
@@ -422,9 +435,12 @@
     <Content Include="Views\Usuario\Login.cshtml" />
     <Content Include="Views\LarTemporario\Create.cshtml" />
     <Content Include="Views\LarTemporario\Delete.cshtml" />
-    <Content Include="Views\LarTemporario\Details.cshtml" />
     <Content Include="Views\LarTemporario\Edit.cshtml" />
     <Content Include="Views\LarTemporario\Index.cshtml" />
+    <Content Include="Views\GerenciamentoDenuncia\Create.cshtml" />
+    <Content Include="Views\GerenciamentoDenuncia\Delete.cshtml" />
+    <Content Include="Views\GerenciamentoDenuncia\Edit.cshtml" />
+    <Content Include="Views\GerenciamentoDenuncia\Index.cshtml" />
     <None Include="web.Debug_E.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -470,9 +486,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\CorreioAPI\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
