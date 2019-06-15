@@ -1,0 +1,197 @@
+﻿@model AdotaPet.WebApp.Models.Entities.Adocao
+
+@{
+    ViewBag.Title = "Adocao";
+}
+
+<h2>Adoção</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group col-md-6 ">
+        <label class="control-label col-md-2">Codigo</label>
+        <div class="col-md-2">
+            <input class="form-control col-md-10" id="codigo" disabled>
+        </div>
+    </div>
+    <div class="form-group col-md-6 ">
+        <label class="control-label col-md-2">Pessoa</label>
+        <div class="col-md-10">
+            <select class="custom-select form-control col-md-10" id="pessoa_Id">
+                <option selected value="0">Selecione</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group col-md-6">
+        <label class="control-label col-md-2">Cadastro</label>
+        <div class="col-md-4">
+            <input class="form-control col-md-10" id="data_cadastro" disabled>
+        </div>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label class="control-label col-md-2">Cadastro finalizacao</label>
+        <div class="col-md-4">
+            <input class="form-control col-md-10" id="data_finalizacao">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <div class="col-md-offset-2 col-md-10" id="btnCadastrar">
+                <input type="button" value="Salvar" id="cadastrar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input id="adocao" type="hidden" />
+    </div>
+    </div>
+
+    }
+    <table class="table" style="display:none;" id="tabela">
+        <tr>
+            <td>
+                <div class="form-group col-md-10 ">
+                    <label class="control-label col-md-2">Animal</label>
+                    <div class="col-md-6">
+                        <select class="custom-select form-control col-md-2" id="animal_Id">
+                            <option selected value="0">Selecione</option>
+                        </select>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="col-md-6">
+                    <input class=" btn btn-success form-control col-md-2" value="Adicionar" id="adicionar">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Animal
+            </th>
+            <th>
+                Pessoa
+            </th>
+        </tr>
+    </table>
+    <script>
+        window.onload = function () {
+            popularPessoas();
+            $("#data_cadastro").val(RetornaDataHoraAtual());
+            $("#cadastrar").click(function () {
+                salvar();
+            });
+            $("#adicionar").click(function () {
+                if ($("#animal_Id").val() != "") {
+                    adicionarItens();
+                }
+            });
+        }
+        function salvar() {
+            var adocao = {
+                "data_finalizacao": $("#data_finalizacao").val(),
+                "pessoa_Id": $("#pessoa_Id").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: "\Salvar",
+                data: JSON.stringify(adocao),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resposta) {
+                    console.log(resposta);
+                    $("#codigo").val(resposta.Codigo);
+                    popularAnimais();
+                    $("#adocao").val(resposta.Id);
+                    $("#tabela").show("slow");
+                },
+                error: function () {
+                    alert("Não foi possivel listas as doenças, por favor entrar em contato com o suporte técnico");
+                }
+            });
+        }
+        function popularPessoas() {
+            $.ajax({
+                type: "POST",
+                url: "\ObterPessoas",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resposta) {
+                    popularComboPessoa(resposta);
+                },
+                error: function () {
+                    alert("Não foi possivel listas as doenças, por favor entrar em contato com o suporte técnico");
+                }
+            });
+        }
+        function RetornaDataHoraAtual() {
+            var dNow = new Date();
+            var localdate = dNow.getDate() + '/' + (dNow.getMonth() + 1) + '/' + dNow.getFullYear();
+            return localdate;
+        }
+        function popularComboPessoa(pessoas) {
+            var comboDoenca = $("#pessoa_Id");
+            $.each(pessoas, function (indice, pessoa) {
+                comboDoenca.append($("<option value=" + this.Id + ">").text((this.Codigo + ' - ' + this.Nome)));
+            });
+        }
+        function popularAnimais() {
+            $.ajax({
+                type: "POST",
+                url: "\ObterAnimais",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resposta) {
+                    popularComboAnimal(resposta);
+                },
+                error: function () {
+                    alert("Não foi possivel listas as doenças, por favor entrar em contato com o suporte técnico");
+                }
+            });
+        }
+        function popularComboAnimal(animais) {
+            var comboAnimal = $("#animal_Id");
+            $.each(animais, function (indice, animail) {
+                comboAnimal.append($("<option value=" + this.Id + ">").text((this.Codigo + ' - ' + this.Nome)));
+            });
+        }
+        function adicionarItens() {
+            var adocao = {
+                "adocao_Id": $("#adocao").val(),
+                "animal_Id": $("#animal_Id").val(),
+                "pessoa_Id": $("#pessoa_Id").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: "\AdicionarItens",
+                data: JSON.stringify(adocao),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (resposta) {
+                    console.log(resposta);
+                    var tabela = $("#tabela");
+                    $(".remove").each(function () {
+                        $(this).remove();
+                    })
+                    $.each(resposta, function (indice, resposta) {
+                        var tr = $("<tr>").addClass("remove");
+                        tr.append($("<td>").text((this.codigoAnimal + ' - ' + this.nomeAnimal)));
+                        tr.append($("<td>").text((this.codigoPessoa + ' - ' + this.nomePessoa)));
+                        tabela.append(tr);
+                    });
+                },
+                error: function () {
+                    alert("Não foi possivel listas as doenças, por favor entrar em contato com o suporte técnico");
+                }
+            });
+        }
+    </script>
+    

@@ -67,20 +67,21 @@ namespace AdotaPet.WebApp.Controllers
         {
             try
             {
-                using (var ws = new BuscaEndereco.AtendeClienteClient())
-                {
-                    var resultado = ws.consultaCEP(cep);
-                    var obj = new
-                    {
-                        codigo = 200,
-                        cidade = resultado.cidade,
-                        endereco = resultado.end,
-                        complemento = resultado.complemento2,
-                        bairro = resultado.bairro,
-                        uf = resultado.uf
-                    };
-                    return Json(obj, JsonRequestBehavior.AllowGet);
-                }
+                /*   using (var ws = new BuscaEndereco.AtendeClienteClient())
+                   {
+                       var resultado = ws.consultaCEP(cep);
+                       var obj = new
+                       {
+                           codigo = 200,
+                           cidade = resultado.cidade,
+                           endereco = resultado.end,
+                           complemento = resultado.complemento2,
+                           bairro = resultado.bairro,
+                           uf = resultado.uf
+                       };
+                       return Json(obj, JsonRequestBehavior.AllowGet);
+                   }*/
+                return Json("", JsonRequestBehavior.AllowGet);
             }
             catch(Exception ex)
             {

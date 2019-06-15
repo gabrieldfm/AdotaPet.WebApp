@@ -31,13 +31,9 @@ namespace AdotaPet.WebApp.Migrations
 
                     b.Property<DateTime>("Data_Finalizacao");
 
-                    b.Property<int>("Ong_IdId");
-
                     b.Property<int>("Pessoa_IdId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Ong_IdId");
 
                     b.HasIndex("Pessoa_IdId");
 
@@ -81,8 +77,6 @@ namespace AdotaPet.WebApp.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
-                    b.Property<int>("Ong_IdId");
-
                     b.Property<short>("Porte");
 
                     b.Property<int>("Raca_IdId");
@@ -103,11 +97,36 @@ namespace AdotaPet.WebApp.Migrations
 
                     b.HasIndex("Doenca_IdId");
 
-                    b.HasIndex("Ong_IdId");
-
                     b.HasIndex("Raca_IdId");
 
                     b.ToTable("Animal");
+                });
+
+            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.ControleAcompanhamento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Codigo");
+
+                    b.Property<DateTime>("Data_Cadastro");
+
+                    b.Property<int?>("Ong_IdId");
+
+                    b.Property<int?>("Pessoa_IdId");
+
+                    b.Property<string>("descricao");
+
+                    b.Property<string>("status");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Ong_IdId");
+
+                    b.HasIndex("Pessoa_IdId");
+
+                    b.ToTable("ControleAcompanhamento");
                 });
 
             modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Doenca", b =>
@@ -171,8 +190,6 @@ namespace AdotaPet.WebApp.Migrations
 
                     b.Property<int>("Codigo");
 
-                    b.Property<int>("Data");
-
                     b.Property<DateTime>("Data_evento");
 
                     b.Property<string>("Descricao")
@@ -203,13 +220,9 @@ namespace AdotaPet.WebApp.Migrations
                         .IsRequired()
                         .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
 
-                    b.Property<int>("Ong_IdId");
-
                     b.Property<decimal>("Valor");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Ong_IdId");
 
                     b.ToTable("Financeiro");
                 });
@@ -273,31 +286,65 @@ namespace AdotaPet.WebApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
                     b.Property<string>("Cnpj")
                         .IsRequired()
                         .HasMaxLength(18);
 
                     b.Property<int>("Codigo");
 
-                    b.Property<int>("Endereco_IdId");
+                    b.Property<string>("Complemento")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Logradouro")
+                        .IsRequired()
+                        .HasMaxLength(200);
 
                     b.Property<string>("Nome_Fantasia")
                         .IsRequired()
                         .HasMaxLength(200);
 
+                    b.Property<int>("Numero");
+
                     b.Property<string>("Razao_Social")
                         .IsRequired()
                         .HasMaxLength(200);
 
-                    b.Property<int>("Usuario_IdId");
+                    b.Property<string>("UF")
+                        .IsRequired()
+                        .HasMaxLength(2);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Endereco_IdId");
-
-                    b.HasIndex("Usuario_IdId");
-
                     b.ToTable("Ong");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Bairro = "Centro",
+                            Cep = "88802090",
+                            Cidade = "Circiuma",
+                            Cnpj = "01234567891234",
+                            Codigo = 1,
+                            Complemento = "",
+                            Logradouro = "Centro",
+                            Nome_Fantasia = "AdminOng",
+                            Numero = 1,
+                            Razao_Social = "AdminOng",
+                            UF = "SC"
+                        });
                 });
 
             modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Pessoa", b =>
@@ -337,8 +384,6 @@ namespace AdotaPet.WebApp.Migrations
 
                     b.Property<int>("Numero");
 
-                    b.Property<int>("Ong_IdId");
-
                     b.Property<string>("Rg")
                         .IsRequired()
                         .HasMaxLength(20);
@@ -352,8 +397,6 @@ namespace AdotaPet.WebApp.Migrations
                         .HasMaxLength(2);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Ong_IdId");
 
                     b.ToTable("Pessoa");
                 });
@@ -373,11 +416,7 @@ namespace AdotaPet.WebApp.Migrations
                     b.Property<string>("Observacao")
                         .HasMaxLength(200);
 
-                    b.Property<int?>("Ong_IdId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("Ong_IdId");
 
                     b.ToTable("Raca");
                 });
@@ -400,6 +439,8 @@ namespace AdotaPet.WebApp.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<int>("OngId");
+
                     b.Property<string>("Perfil")
                         .HasMaxLength(15);
 
@@ -409,16 +450,25 @@ namespace AdotaPet.WebApp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OngId");
+
                     b.ToTable("Usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ativo = "Y",
+                            Login = "ADMINISTRADOR",
+                            Nome = "Administrador",
+                            OngId = 1,
+                            Perfil = "ADMINISTRADOR",
+                            Senha = "1234"
+                        });
                 });
 
             modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Adocao", b =>
                 {
-                    b.HasOne("AdotaPet.WebApp.Models.Entities.Ong", "Ong_Id")
-                        .WithMany()
-                        .HasForeignKey("Ong_IdId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("AdotaPet.WebApp.Models.Entities.Pessoa", "Pessoa_Id")
                         .WithMany()
                         .HasForeignKey("Pessoa_IdId")
@@ -445,26 +495,24 @@ namespace AdotaPet.WebApp.Migrations
                         .HasForeignKey("Doenca_IdId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("AdotaPet.WebApp.Models.Entities.Ong", "Ong_Id")
-                        .WithMany()
-                        .HasForeignKey("Ong_IdId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("AdotaPet.WebApp.Models.Entities.Raca", "Raca_Id")
                         .WithMany()
                         .HasForeignKey("Raca_IdId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Evento", b =>
+            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.ControleAcompanhamento", b =>
                 {
                     b.HasOne("AdotaPet.WebApp.Models.Entities.Ong", "Ong_Id")
                         .WithMany()
-                        .HasForeignKey("Ong_IdId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Ong_IdId");
+
+                    b.HasOne("AdotaPet.WebApp.Models.Entities.Pessoa", "Pessoa_Id")
+                        .WithMany()
+                        .HasForeignKey("Pessoa_IdId");
                 });
 
-            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Financeiro", b =>
+            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Evento", b =>
                 {
                     b.HasOne("AdotaPet.WebApp.Models.Entities.Ong", "Ong_Id")
                         .WithMany()
@@ -490,32 +538,12 @@ namespace AdotaPet.WebApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Ong", b =>
+            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Usuario", b =>
                 {
-                    b.HasOne("AdotaPet.WebApp.Models.Entities.Endereco", "Endereco_Id")
+                    b.HasOne("AdotaPet.WebApp.Models.Entities.Ong", "Ong")
                         .WithMany()
-                        .HasForeignKey("Endereco_IdId")
+                        .HasForeignKey("OngId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("AdotaPet.WebApp.Models.Entities.Usuario", "Usuario_Id")
-                        .WithMany()
-                        .HasForeignKey("Usuario_IdId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Pessoa", b =>
-                {
-                    b.HasOne("AdotaPet.WebApp.Models.Entities.Ong", "Ong_Id")
-                        .WithMany()
-                        .HasForeignKey("Ong_IdId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("AdotaPet.WebApp.Models.Entities.Raca", b =>
-                {
-                    b.HasOne("AdotaPet.WebApp.Models.Entities.Ong", "Ong_Id")
-                        .WithMany()
-                        .HasForeignKey("Ong_IdId");
                 });
 #pragma warning restore 612, 618
         }

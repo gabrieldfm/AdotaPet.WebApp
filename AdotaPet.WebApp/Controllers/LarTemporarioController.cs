@@ -64,7 +64,7 @@ namespace AdotaPet.WebApp.Controllers
         public JsonResult ObterCep(string cep)
         {
             try
-            {
+            {/*
                 using (var ws = new BuscaEndereco.AtendeClienteClient())
                 {
                     var resultado = ws.consultaCEP(cep);
@@ -79,6 +79,8 @@ namespace AdotaPet.WebApp.Controllers
                     };
                     return Json(obj, JsonRequestBehavior.AllowGet);
                 }
+                */
+                return Json("", JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
