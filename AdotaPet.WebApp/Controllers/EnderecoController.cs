@@ -62,7 +62,7 @@ namespace AdotaPet.WebApp.Controllers
         }
 
         //API DOS CORREIOS
-        [HttpPost]
+       /* [HttpPost]
         public JsonResult ObterCep(string cep)
         {
             try
@@ -93,7 +93,7 @@ namespace AdotaPet.WebApp.Controllers
                 return Json(obj, JsonRequestBehavior.AllowGet); 
             } 
 
-        }
+        } */
 
         // GET: Endereco/Edit/5
         public ActionResult Edit(int? id)
