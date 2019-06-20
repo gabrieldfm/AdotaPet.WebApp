@@ -20,6 +20,7 @@ namespace AdotaPet.WebApp
         public DbSet<LarTemporario> LarTemporario { get; set; }
         public DbSet<Evento> Evento { get; set; }
         public DbSet<ControleAcompanhamento> ControleAcompanhamento { get; set; }
+        public DbSet<GerenciamentoDenuncia> GerenciamentoDenuncia { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
