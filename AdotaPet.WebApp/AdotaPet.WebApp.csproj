@@ -236,7 +236,6 @@
       <DependentUpon>20190614024532_teste.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationContextModelSnapshot.cs" />
-    <Compile Include="Models\AdotaPetWebAppContext.cs" />
     <Compile Include="Models\Entities\Adocao.cs" />
     <Compile Include="Models\Entities\AdocaoDTO.cs" />
     <Compile Include="Models\Entities\Adocao_Itens.cs" />

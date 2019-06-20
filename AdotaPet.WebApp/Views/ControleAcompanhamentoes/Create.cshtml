@@ -1,59 +1,151 @@
 ﻿@model AdotaPet.WebApp.Models.Entities.ControleAcompanhamento
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Controle de acompanhamento";
 }
 
-<h2>Create</h2>
+<h2>Controle de acompanhamento</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>ControleAcompanhamento</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group col-md-6 ">
+            <label class="control-label col-md-2">Pessoa</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+                <select class="custom-select form-control col-md-10" id="pessoa_Id">
+                    <option selected value="0">Selecione</option>
+                </select>
             </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label col-md-2">Cadastro</label>
+            <div class="col-md-4">
+                <input class="form-control col-md-10" id="data_cadastro">
+            </div>
+        </div>
+        <div class="form-group col-md-6 ">
+            <label class="control-label col-md-2">Avaliação</label>
+            <div class="col-md-10">
+                <select class="custom-select form-control col-md-10" id="avaliacao">
+                    <option selected value="Boa">Boa</option>
+                    <option value="Media">Media</option>
+                    <option value="Ruim">Ruim</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-6 ">
+            <label class="control-label col-md-2">Descrição</label>
+            <div class="col-md-10">
+                <textarea class="form-control col-md-10" id="descricao" cols="50"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <input id="acopanhamento" type="hidden" />
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Data_Cadastro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Data_Cadastro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Data_Cadastro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="form-group col-md-6">
+                <div class="col-md-offset-2 col-md-10" id="btnCadastrar">
+                    <input type="button" value="Salvar" id="cadastrar" class="btn btn-success" />
+                </div>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<table class="table" id="tabela">
+    <tr>
+        <th>
+            Código
+        </th>
+        <th>
+            Descrição
+        </th>
+        <th>
+            Classificação
+        </th>
+    </tr>
+</table>
+<script>
+    window.onload = function () {
+        popularPessoas();
+        $("#cadastrar").click(function(){
+            salvar();
+        });
+        $.ajax({
+            type: "POST",
+            url: "\ObterAcompanhamento",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (resposta) {
+                popularTabela(resposta);
+            }
+        });
+       
+    }
+    function salvar() {
+        var ac = {
+            "pessoa_Id": $("#pessoa_Id").val(),
+            "data_cadastro": $("#data_cadastro").val(),
+            "avaliacao": $("#avaliacao").val(),
+            "descricao": $("#descricao").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "\Salvar",
+            data: JSON.stringify(ac),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (resposta) {
+                console.log(resposta);
+                $("#acopanhamento").val(resposta.Id);
+                popularTabela(resposta);
+            },
+            error: function () {
+                alert("Não foi possivel listas as doenças, por favor entrar em contato com o suporte técnico");
+            }
+        });
+    }
+    function popularPessoas() {
+        $.ajax({
+            type: "POST",
+            url: "/Adocao/ObterPessoas",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (resposta) {
+                popularComboPessoa(resposta);
+            },
+            error: function () {
+                alert("Não foi possivel listas as doenças, por favor entrar em contato com o suporte técnico");
+            }
+        });
+    }
+    function RetornaDataHoraAtual() {
+        var dNow = new Date();
+        var localdate = dNow.getDate() + '/' + (dNow.getMonth() + 1) + '/' + dNow.getFullYear();
+        return localdate;
+    }
+    function popularComboPessoa(pessoas) {
+        var comboDoenca = $("#pessoa_Id");
+        $.each(pessoas, function (indice, pessoa) {
+            comboDoenca.append($("<option value=" + this.Id + ">").text((this.Codigo + ' - ' + this.Nome)));
+        });
+    }
+    
+    function popularTabela(acompanhamento) {
+        var tabela = $("#tabela");
+        $(".remove").each(function () {
+           $(this).remove();
+        })
+        $.each(acompanhamento, function (indice, acompanhamento) {
+            var tr = $("<tr>").addClass("remove");
+            tr.append($("<td>").text((this.Codigo)));
+            tr.append($("<td>").text((this.descricao)));
+            tr.append($("<td>").text((this.status)));
+            tabela.append(tr);
+        });
+    }
+</script>

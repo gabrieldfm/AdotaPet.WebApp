@@ -124,5 +124,26 @@ namespace AdotaPet.WebApp.Controllers
             }
             base.Dispose(disposing);
         }
+        protected int ObterProximoCodigo()
+        {
+            return db.ControleAcompanhamento.Count() > 0 ? new ApplicationContext().ControleAcompanhamento.Where(d => d.Codigo > 0).Select(d => d.Codigo).Max() + 1 : 1;
+        }
+        public JsonResult Salvar(string pessoa_Id, string data_cadastro, string avaliacao, string descricao)
+        {
+            ControleAcompanhamento acompanhamento = new ControleAcompanhamento();
+            acompanhamento.Codigo = ObterProximoCodigo();
+            acompanhamento.Data_Cadastro = new DateTime();
+            acompanhamento.Pessoa_Id = db.Pessoa.Find(Convert.ToInt32(pessoa_Id));
+            acompanhamento.status = avaliacao;
+            acompanhamento.descricao = descricao;
+            db.ControleAcompanhamento.Add(acompanhamento);
+            db.SaveChanges();
+
+            return Json(db.ControleAcompanhamento.Where(d => d.Codigo > 0).Include(d => d.Pessoa_Id).ToList(), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ObterAcompanhamento()
+        {
+            return Json(db.ControleAcompanhamento.Where(d => d.Codigo > 0).Include(d => d.Pessoa_Id).ToList(), JsonRequestBehavior.AllowGet);
+        }
     }
 }
