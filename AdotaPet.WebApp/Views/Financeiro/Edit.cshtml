@@ -5,7 +5,9 @@
 }
 
 <h2>Editar movimentação financeira</h2>
-
+<div>
+    @Html.ActionLink("Listagem", "Index", "Index", new { @class = "btn btn-primary" })
+</div>
 
 @using (Html.BeginForm())
 {
@@ -56,9 +58,7 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Listagem", "Index", "Index", new { @class = "btn btn-primary" })
-</div>
+
 
 <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 @section Scripts {
